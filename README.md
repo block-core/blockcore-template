@@ -1,0 +1,1 @@
+# blockcore-sample-coin
