@@ -1,45 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
-using BlockcoreSampleCoin.Networks.Deployments;
-using BlockcoreSampleCoin.Networks.Policies;
+using Blockcore.SampleCoin.Networks.Deployments;
+using Blockcore.SampleCoin.Networks.Policies;
 using NBitcoin;
 using NBitcoin.BouncyCastle.Math;
 using NBitcoin.DataEncoders;
 using NBitcoin.Protocol;
 
-namespace BlockcoreSampleCoin.Networks
+namespace Blockcore.SampleCoin.Networks
 {
-    public class BscTest : BscMain
+    public class SampleCoinRegTest : SampleCoinMain
     {
-        public BscTest()
+        public SampleCoinRegTest()
         {
-            // The message start string is designed to be unlikely to occur in normal data.
-            // The characters are rarely used upper ASCII, not valid as UTF-8, and produce
-            // a large 4-byte int at any alignment.
             var messageStart = new byte[4];
-            messageStart[0] = 0x71;
-            messageStart[1] = 0x31;
-            messageStart[2] = 0x21;
-            messageStart[3] = 0x11;
-            uint magic = BitConverter.ToUInt32(messageStart, 0); // 0x11213171;
+            messageStart[0] = 0xcd;
+            messageStart[1] = 0xf2;
+            messageStart[2] = 0xc0;
+            messageStart[3] = 0xef;
+            uint magic = BitConverter.ToUInt32(messageStart, 0); // 0xefc0f2cd
 
-            this.Name = "BscTest";
-            this.NetworkType = NetworkType.Testnet;
+            this.Name = "SampleCoinRegTest";
+            this.NetworkType = NetworkType.Regtest;
             this.Magic = magic;
 
-            // TODO: set you ticker
-            this.CoinTicker = "TBSC";
+            this.CoinTicker = "TXSC";
 
             // TODO: set your ports and defaults
-            this.DefaultPort = 26178;
+            this.DefaultPort = 18444;
             this.DefaultMaxOutboundConnections = 16;
             this.DefaultMaxInboundConnections = 109;
-            this.DefaultRPCPort = 26174;
+            this.DefaultRPCPort = 18442;
             this.DefaultAPIPort = 38221;
-            this.DefaultSignalRPort = 39824;
             this.DefaultBanTimeSeconds = 16000; // 500 (MaxReorg) * 64 (TargetSpacing) / 2 = 4 hours, 26 minutes and 40 seconds
 
-            var powLimit = new Target(new uint256("0000ffff00000000000000000000000000000000000000000000000000000000"));
+            var powLimit = new Target(new uint256("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
 
             var consensusFactory = new PosConsensusFactory();
 
@@ -52,7 +47,7 @@ namespace BlockcoreSampleCoin.Networks
 
             Block genesisBlock = CreateGenesisBlock(consensusFactory, this.GenesisTime, this.GenesisNonce, this.GenesisBits, this.GenesisVersion, this.GenesisReward);
 
-            genesisBlock.Header.Time = 1493909211;
+            genesisBlock.Header.Time = 1494909211;
             genesisBlock.Header.Nonce = 2433759;
             genesisBlock.Header.Bits = powLimit;
 
@@ -75,27 +70,13 @@ namespace BlockcoreSampleCoin.Networks
                 [BuriedDeployments.BIP66] = 0
             };
 
-            var bip9Deployments = new BscBIP9Deployments()
+            var bip9Deployments = new SampleCoinBIP9Deployments()
             {
-                [BscBIP9Deployments.TestDummy] = new BIP9DeploymentsParameters("TestDummy", 28,
-                    new DateTime(2019, 6, 1, 0, 0, 0, DateTimeKind.Utc),
-                    new DateTime(2020, 6, 1, 0, 0, 0, DateTimeKind.Utc),
-                    BIP9DeploymentsParameters.DefaultTestnetThreshold),
-
-                [BscBIP9Deployments.CSV] = new BIP9DeploymentsParameters("CSV", 0,
-                    new DateTime(2019, 6, 1, 0, 0, 0, DateTimeKind.Utc),
-                    new DateTime(2020, 6, 1, 0, 0, 0, DateTimeKind.Utc),
-                    BIP9DeploymentsParameters.DefaultTestnetThreshold),
-
-                [BscBIP9Deployments.Segwit] = new BIP9DeploymentsParameters("Segwit", 1,
-                    new DateTime(2019, 6, 1, 0, 0, 0, DateTimeKind.Utc),
-                    new DateTime(2020, 6, 1, 0, 0, 0, DateTimeKind.Utc),
-                    BIP9DeploymentsParameters.DefaultTestnetThreshold),
-
-                [BscBIP9Deployments.ColdStaking] = new BIP9DeploymentsParameters("ColdStaking", 2,
-                    new DateTime(2018, 11, 1, 0, 0, 0, DateTimeKind.Utc),
-                    new DateTime(2019, 6, 1, 0, 0, 0, DateTimeKind.Utc),
-                    BIP9DeploymentsParameters.DefaultTestnetThreshold)
+                // Always active on SampleCoinRegTest.
+                [SampleCoinBIP9Deployments.TestDummy] = new BIP9DeploymentsParameters("TestDummy", 28, BIP9DeploymentsParameters.AlwaysActive, 999999999, BIP9DeploymentsParameters.AlwaysActive),
+                [SampleCoinBIP9Deployments.CSV] = new BIP9DeploymentsParameters("CSV", 0, BIP9DeploymentsParameters.AlwaysActive, 999999999, BIP9DeploymentsParameters.AlwaysActive),
+                [SampleCoinBIP9Deployments.Segwit] = new BIP9DeploymentsParameters("Segwit", 1, BIP9DeploymentsParameters.AlwaysActive, 999999999, BIP9DeploymentsParameters.AlwaysActive),
+                [SampleCoinBIP9Deployments.ColdStaking] = new BIP9DeploymentsParameters("ColdStaking", 2, BIP9DeploymentsParameters.AlwaysActive, 999999999, BIP9DeploymentsParameters.AlwaysActive),
             };
 
             this.Consensus = new NBitcoin.Consensus(
@@ -112,7 +93,7 @@ namespace BlockcoreSampleCoin.Networks
                 bip34Hash: new uint256("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8"),
                 minerConfirmationWindow: 2016, // nPowTargetTimespan / nPowTargetSpacing
                 maxReorgLength: 500,
-                defaultAssumeValid: new uint256("0x690e7e30ae3fa6c10855db0f8bc10110a54f5c73019f5581ee038186154397d0"), // 1100000
+                defaultAssumeValid: null, // turn off assumevalid for regtest.
                 maxMoney: long.MaxValue,
                 coinbaseMaturity: 10,
                 premineHeight: 2,
@@ -120,9 +101,9 @@ namespace BlockcoreSampleCoin.Networks
                 proofOfWorkReward: Money.Coins(4),
                 targetTimespan: TimeSpan.FromSeconds(14 * 24 * 60 * 60), // two weeks
                 targetSpacing: TimeSpan.FromSeconds(64),
-                powAllowMinDifficultyBlocks: false,
-                posNoRetargeting: false,
-                powNoRetargeting: false,
+                powAllowMinDifficultyBlocks: true,
+                posNoRetargeting: true,
+                powNoRetargeting: true,
                 powLimit: powLimit,
                 minimumChainWork: null,
                 isProofOfStake: true,
@@ -140,33 +121,22 @@ namespace BlockcoreSampleCoin.Networks
             this.Base58Prefixes[(int)Base58Type.SECRET_KEY] = new byte[] { (65 + 128) };
 
             this.Bech32Encoders = new Bech32Encoder[2];
-            var encoder = new Bech32Encoder("tbsc");
+            var encoder = new Bech32Encoder("TXSC");
             this.Bech32Encoders[(int)Bech32Type.WITNESS_PUBKEY_ADDRESS] = encoder;
             this.Bech32Encoders[(int)Bech32Type.WITNESS_SCRIPT_ADDRESS] = encoder;
 
-            this.Checkpoints = new Dictionary<int, CheckpointInfo>
-            {
-             };
+            this.Checkpoints = new Dictionary<int, CheckpointInfo>();
 
-            this.DNSSeeds = new List<DNSSeedData>
-            {
-                // TODO: Add DNS seeds here
-                // new DNSSeedData("X.bsc.com", "X.bsc.com"),
-            };
+            this.DNSSeeds = new List<DNSSeedData>();
+            this.SeedNodes = new List<NetworkAddress>();
 
-            this.SeedNodes = new List<NetworkAddress>
-            {
-                // TODO: Add seed nodes here
-                // new NetworkAddress(IPAddress.Parse("X.X.X.X"), 16178), 
-            };
-
-            this.StandardScriptsRegistry = new BscStandardScriptsRegistry();
+            this.StandardScriptsRegistry = new SampleCoinStandardScriptsRegistry();
 
             // 64 below should be changed to TargetSpacingSeconds when we move that field.
             Assert(this.DefaultBanTimeSeconds <= this.Consensus.MaxReorgLength * 64 / 2);
 
             // TODO: update RHS to match HashGenesisBlock
-            Assert(this.Consensus.HashGenesisBlock == uint256.Parse("0x00000e246d7b73b88c9ab55f2e5e94d9e22d471def3df5ea448f5576b1d156b9"));
+            Assert(this.Consensus.HashGenesisBlock == uint256.Parse("0x93925104d664314f581bc7ecb7b4bad07bcfabd1cfce4256dbd2faddcf53bd1f"));
 
             this.RegisterRules(this.Consensus);
             this.RegisterMempoolRules(this.Consensus);

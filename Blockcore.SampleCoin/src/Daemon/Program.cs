@@ -17,7 +17,7 @@ using Blockcore.Features.SignalR.Events;
 using Blockcore.Utilities;
 using NBitcoin.Protocol;
 
-namespace BlockcoreSampleCoin.Daemon
+namespace Blockcore.SampleCoin.Daemon
 {
     public class Program
     {
@@ -25,7 +25,7 @@ namespace BlockcoreSampleCoin.Daemon
         {
             try
             {
-                var nodeSettings = new NodeSettings(networksSelector: Networks.Networks.Bsc,
+                var nodeSettings = new NodeSettings(networksSelector: Networks.Networks.SampleCoin,
                     protocolVersion: ProtocolVersion.PROVEN_HEADER_VERSION, args: args)
                 {
                     MinProtocolVersion = ProtocolVersion.ALT_PROTOCOL_VERSION

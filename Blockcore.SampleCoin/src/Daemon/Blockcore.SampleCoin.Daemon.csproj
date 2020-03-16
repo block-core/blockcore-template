@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RuntimeFrameworkVersion>3.1.0</RuntimeFrameworkVersion>
-    <AssemblyName>BlockcoreSampleCoin.Daemon</AssemblyName>
+    <AssemblyName>Blockcore.SampleCoin.Daemon</AssemblyName>
     <OutputType>Exe</OutputType>
     <Authors>Blockcore Developers</Authors>
   </PropertyGroup>
@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Networks\BlockcoreSampleCoin.Networks.csproj" />
+    <ProjectReference Include="..\Networks\Blockcore.SampleCoin.Networks.csproj" />
   </ItemGroup>
 
 </Project>

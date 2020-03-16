@@ -5,12 +5,12 @@ using Blockcore.Utilities;
 using Microsoft.Extensions.Logging;
 using NBitcoin;
 
-namespace BlockcoreSampleCoin.Networks.Rules
+namespace Blockcore.SampleCoin.Networks.Rules
 {
     /// <summary>
-    /// Checks if <see cref="BscMain"/> network block's header has a valid block version.
+    /// Checks if <see cref="SampleCoinMain"/> network block's header has a valid block version.
     /// </summary>
-    public class BscHeaderVersionRule : HeaderVersionRule
+    public class SampleCoinHeaderVersionRule : HeaderVersionRule
     {
         /// <inheritdoc />
         /// <exception cref="ConsensusErrors.BadVersion">Thrown if block's version is outdated or otherwise invalid.</exception>

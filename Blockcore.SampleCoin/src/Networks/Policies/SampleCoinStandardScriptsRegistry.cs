@@ -3,12 +3,12 @@ using System.Linq;
 using NBitcoin;
 using NBitcoin.BitcoinCore;
 
-namespace BlockcoreSampleCoin.Networks.Policies
+namespace Blockcore.SampleCoin.Networks.Policies
 {
     /// <summary>
     /// Blockcore sample coin-specific standard transaction definitions.
     /// </summary>
-    public class BscStandardScriptsRegistry : StandardScriptsRegistry
+    public class SampleCoinStandardScriptsRegistry : StandardScriptsRegistry
     {
         // See MAX_OP_RETURN_RELAY in stratisX, <script.h>
         public const int MaxOpReturnRelay = 40;

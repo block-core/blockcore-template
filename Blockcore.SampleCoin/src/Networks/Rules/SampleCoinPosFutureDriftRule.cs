@@ -1,12 +1,12 @@
 ﻿using Blockcore.Features.Consensus.Rules.CommonRules;
 
-namespace BlockcoreSampleCoin.Networks.Rules
+namespace Blockcore.SampleCoin.Networks.Rules
 {
     /// <summary>
-    /// A rule that will verify the block time drift is according to the PoS consensus rules for the <see cref="BscMain"/> network (and its test networks).
+    /// A rule that will verify the block time drift is according to the PoS consensus rules for the <see cref="SampleCoinMain"/> network (and its test networks).
     /// New networks must use the <see cref="PosFutureDriftRule"/>.
     /// </summary>
-    public class BscPosFutureDriftRule : PosFutureDriftRule
+    public class SampleCoinPosFutureDriftRule : PosFutureDriftRule
     {
         /// <summary>Drifting Bug Fix, hardfork on Sat, 19 Nov 2016 00:00:00 GMT.</summary>
         public const long DriftingBugFixTimestamp = 1479513600;

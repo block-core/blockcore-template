@@ -1,11 +1,11 @@
 ﻿using NBitcoin;
 
-namespace BlockcoreSampleCoin.Networks.Deployments
+namespace Blockcore.SampleCoin.Networks.Deployments
 {
     /// <summary>
     /// BIP9 deployments for the Blockcore sample coin network.
     /// </summary>
-    public class BscBIP9Deployments : BIP9DeploymentsArray
+    public class SampleCoinBIP9Deployments : BIP9DeploymentsArray
     {
         // The position of each deployment in the deployments array. Note that this is decoupled from the actual position of the flag bit for the deployment in the block version.
         public const int TestDummy = 0;
@@ -19,7 +19,7 @@ namespace BlockcoreSampleCoin.Networks.Deployments
         /// <summary>
         /// Constructs the BIP9 deployments array.
         /// </summary>
-        public BscBIP9Deployments() : base(NumberOfDeployments)
+        public SampleCoinBIP9Deployments() : base(NumberOfDeployments)
         {
         }
 

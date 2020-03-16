@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Blockcore.Coin.Template</id>
+    <version>0.0.1</version>
+    <description>
+      Creates a new blockchain based on the blockcore sample coin.
+    </description>
+    <authors>Blockcore</authors>
+    <license type="expression">MIT</license>
+    <repository type="git" url="https://github.com/block-core/blockcore" />
+    <packageTypes>
+      <packageType name="Template" />
+    </packageTypes>
+  </metadata>
+</package>

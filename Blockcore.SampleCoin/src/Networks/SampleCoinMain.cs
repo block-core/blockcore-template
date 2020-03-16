@@ -4,26 +4,25 @@ using Blockcore.Features.Consensus.Rules.CommonRules;
 using Blockcore.Features.Consensus.Rules.ProvenHeaderRules;
 using Blockcore.Features.Consensus.Rules.UtxosetRules;
 using Blockcore.Features.MemoryPool.Rules;
-using BlockcoreSampleCoin.Networks.Deployments;
-using BlockcoreSampleCoin.Networks.Policies;
-using BlockcoreSampleCoin.Networks.Rules;
+using Blockcore.SampleCoin.Networks.Deployments;
+using Blockcore.SampleCoin.Networks.Policies;
+using Blockcore.SampleCoin.Networks.Rules;
 using NBitcoin;
 using NBitcoin.BouncyCastle.Math;
 using NBitcoin.DataEncoders;
 using NBitcoin.Protocol;
 
-namespace BlockcoreSampleCoin.Networks
+namespace Blockcore.SampleCoin.Networks
 {
-    // TODO: rename networks and other "bsc" strings
-    public class BscMain : Network
+    public class SampleCoinMain : Network
     {
-        /// <summary> The name of the root folder containing the different BlockcoreSampleCoin blockchains (BscMain, BscTest, BscRegTest). </summary>
-        public const string BscRootFolderName = "bsc";
+        /// <summary> The name of the root folder containing the different Blockcore.SampleCoin blockchains (SampleCoinMain, SampleCoinTest, SampleCoinRegTest). </summary>
+        public const string SampleCoinRootFolderName = "SampleCoin";
 
-        /// <summary> The default name used for the BlockcoreSampleCoin configuration file. </summary>
-        public const string BscDefaultConfigFilename = "bsc.conf";
+        /// <summary> The default name used for the Blockcore.SampleCoin configuration file. </summary>
+        public const string SampleCoinDefaultConfigFilename = "SampleCoin.conf";
 
-        public BscMain()
+        public SampleCoinMain()
         {
             // TODO: define your magic number
             // The message start string is designed to be unlikely to occur in normal data.
@@ -36,12 +35,11 @@ namespace BlockcoreSampleCoin.Networks
             messageStart[3] = 0x05;
             uint magic = BitConverter.ToUInt32(messageStart, 0); //0x5223570;
 
-            this.Name = "BscMain";
+            this.Name = "SampleCoinMain";
             this.NetworkType = NetworkType.Mainnet;
             this.Magic = magic;
 
-            // TODO: set your ticker
-            this.CoinTicker = "BSC";
+            this.CoinTicker = "XSC";
 
             // TODO: set your ports and defaults
             this.DefaultPort = 16178;
@@ -54,8 +52,8 @@ namespace BlockcoreSampleCoin.Networks
             this.MinTxFee = 10000;
             this.FallbackFee = 10000;
             this.MinRelayTxFee = 10000;
-            this.RootFolderName = BscRootFolderName;
-            this.DefaultConfigFilename = BscDefaultConfigFilename;
+            this.RootFolderName = SampleCoinRootFolderName;
+            this.DefaultConfigFilename = SampleCoinDefaultConfigFilename;
             this.MaxTimeOffsetSeconds = 25 * 60;
             this.DefaultBanTimeSeconds = 16000; // 500 (MaxReorg) * 64 (TargetSpacing) / 2 = 4 hours, 26 minutes and 40 seconds
 
@@ -89,24 +87,24 @@ namespace BlockcoreSampleCoin.Networks
                 [BuriedDeployments.BIP66] = 0
             };
 
-            var bip9Deployments = new BscBIP9Deployments()
+            var bip9Deployments = new SampleCoinBIP9Deployments()
             {
-                [BscBIP9Deployments.TestDummy] = new BIP9DeploymentsParameters("TestDummy", 28,
+                [SampleCoinBIP9Deployments.TestDummy] = new BIP9DeploymentsParameters("TestDummy", 28,
                     new DateTime(2019, 10, 1, 0, 0, 0, DateTimeKind.Utc),
                     new DateTime(2020, 10, 1, 0, 0, 0, DateTimeKind.Utc),
                     BIP9DeploymentsParameters.DefaultMainnetThreshold),
 
-                [BscBIP9Deployments.CSV] = new BIP9DeploymentsParameters("CSV", 0,
+                [SampleCoinBIP9Deployments.CSV] = new BIP9DeploymentsParameters("CSV", 0,
                     new DateTime(2019, 10, 1, 0, 0, 0, DateTimeKind.Utc),
                     new DateTime(2020, 10, 1, 0, 0, 0, DateTimeKind.Utc),
                     BIP9DeploymentsParameters.DefaultMainnetThreshold),
 
-                [BscBIP9Deployments.Segwit] = new BIP9DeploymentsParameters("Segwit", 1,
+                [SampleCoinBIP9Deployments.Segwit] = new BIP9DeploymentsParameters("Segwit", 1,
                     new DateTime(2019, 10, 1, 0, 0, 0, DateTimeKind.Utc),
                     new DateTime(2020, 10, 1, 0, 0, 0, DateTimeKind.Utc),
                     BIP9DeploymentsParameters.DefaultMainnetThreshold),
 
-                [BscBIP9Deployments.ColdStaking] = new BIP9DeploymentsParameters("ColdStaking", 2,
+                [SampleCoinBIP9Deployments.ColdStaking] = new BIP9DeploymentsParameters("ColdStaking", 2,
                     new DateTime(2019, 12, 2, 0, 0, 0, DateTimeKind.Utc),
                     new DateTime(2020, 12, 2, 0, 0, 0, DateTimeKind.Utc),
                     BIP9DeploymentsParameters.DefaultMainnetThreshold)
@@ -168,14 +166,14 @@ namespace BlockcoreSampleCoin.Networks
             };
 
             this.Bech32Encoders = new Bech32Encoder[2];
-            var encoder = new Bech32Encoder("bsc");
+            var encoder = new Bech32Encoder("XSC");
             this.Bech32Encoders[(int)Bech32Type.WITNESS_PUBKEY_ADDRESS] = encoder;
             this.Bech32Encoders[(int)Bech32Type.WITNESS_SCRIPT_ADDRESS] = encoder;
 
             this.DNSSeeds = new List<DNSSeedData>
             {
                 // TODO: Add DNS seeds here
-                // new DNSSeedData("X.bsc.com", "X.bsc.com"),
+                // new DNSSeedData("X.SampleCoin.com", "X.SampleCoin.com"),
             };
 
             this.SeedNodes = new List<NetworkAddress>
@@ -184,7 +182,7 @@ namespace BlockcoreSampleCoin.Networks
                 // new NetworkAddress(IPAddress.Parse("X.X.X.X"), 16178), 
             };
 
-            this.StandardScriptsRegistry = new BscStandardScriptsRegistry();
+            this.StandardScriptsRegistry = new SampleCoinStandardScriptsRegistry();
 
             // 64 below should be changed to TargetSpacingSeconds when we move that field.
             Assert(this.DefaultBanTimeSeconds <= this.Consensus.MaxReorgLength * 64 / 2);
@@ -202,9 +200,9 @@ namespace BlockcoreSampleCoin.Networks
             consensus.ConsensusRules
                 .Register<HeaderTimeChecksRule>()
                 .Register<HeaderTimeChecksPosRule>()
-                .Register<BscPosFutureDriftRule>()
+                .Register<SampleCoinPosFutureDriftRule>()
                 .Register<CheckDifficultyPosRule>()
-                .Register<BscHeaderVersionRule>()
+                .Register<SampleCoinHeaderVersionRule>()
                 .Register<ProvenHeaderSizeRule>()
                 .Register<ProvenHeaderCoinstakeRule>();
 
