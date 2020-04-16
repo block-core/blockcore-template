@@ -1,10 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RuntimeFrameworkVersion>3.1.0</RuntimeFrameworkVersion>
     <AssemblyName>Blockcore.SampleCoin.Networks</AssemblyName>
-    <Authors>Blockcore Developers</Authors>
+    <Authors>Blockcore</Authors>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -12,9 +12,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blockcore.Features.Consensus" Version="1.0.1" />
-    <PackageReference Include="Blockcore.Features.MemoryPool" Version="1.0.1" />
-    <PackageReference Include="Blockcore.NBitcoin" Version="1.0.1" />
+    <PackageReference Include="Blockcore.Features.Consensus" Version="1.0.2" />
+    <PackageReference Include="Blockcore.Features.MemoryPool" Version="1.0.2" />
+    <PackageReference Include="Blockcore.NBitcoin" Version="1.0.2" />
   </ItemGroup>
 
 </Project>
