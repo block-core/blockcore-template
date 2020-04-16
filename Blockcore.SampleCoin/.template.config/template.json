@@ -1,45 +1,126 @@
 {
-    "$schema": "http://json.schemastore.org/template",
-    "name": "Blockcore Coin",
-    "author": "Blockcore",
-    "classifications": ["Blockchain", "Cryptocurrency"],
-    "identity": "Blockcore.SampleCoin.CSharp",
-    "groupIdentity": "Blockcore.SampleCoin",
-    "shortName": "blockcorecoin",
-    "tags": {
-      "language": "C#",
-      "type": "project"
+  "$schema": "http://json.schemastore.org/template",
+  "name": "Blockcore Coin",
+  "author": "Blockcore",
+  "classifications": [
+    "Blockchain",
+    "Cryptocurrency"
+  ],
+  "identity": "Blockcore.SampleCoin.CSharp",
+  "groupIdentity": "Blockcore.SampleCoin",
+  "shortName": "blockcorecoin",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "Blockcore.SampleCoin",
+  "preferNameDirectory": true,
+  "symbols": {
+    "cointicker": {
+      "type": "parameter",
+      "description": "Replaces coin ticker symbol e.g. 'BTC'. See list: https://github.com/satoshilabs/slips/blob/master/slip-0044.md",
+      "replaces": "XSC",
+      "defaultValue": "BLC"
     },
-    "sourceName": "Blockcore.SampleCoin",
-    "preferNameDirectory": true,
-    "symbols": {
-        "coinTicker": {
-          "type": "parameter",
-          "description": "Replaces coin ticker symbol e.g. 'BTC'",
-          "replaces": "XSC",
-          "isRequired": true
-        },
-        "derivedRename": {
-          "type": "derived",
-          "description": "Replaces file name and text containing 'SampleCoin'",
-          "FileRename": "SampleCoin",
-          "replaces": "SampleCoin",
-          "valueSource": "name",
-          "valueTransform": "AfterLastDot",
-          "defaultValue": "CoinName"
-        }
-     },
-    "Forms": {
-        "AfterLastDot": {
-          "identifier": "replace",
-          "pattern": "^.*\\.(?=[^\\.]+$)",
-          "replacement": ""
-        }
+    "magic": {
+      "type": "parameter",
+      "description": "Should be in format 'F9-BE-B4-D9' (BTC)",
+      "replaces": "02-4B-4C-42",
+      "defaultValue": "02-4B-4C-42"
     },
-    "guids": [
-      "9A19103F-16F7-4668-BE54-9A1E7A4F7556",
-      "ED51D950-AFFC-4638-850B-EACACA7756BD",
-      "F0DBDAA1-175D-4B90-89BA-F7C9CE46046B",
-      "7EFB962A-00F5-4FC5-8416-D2BB1ABA6D20"
-    ]
-  }
+    "port": {
+      "type": "parameter",
+      "description": "The P2P network port",
+      "replaces": "9333",
+      "defaultValue": "9333"
+    },
+    "rpcport": {
+      "type": "parameter",
+      "description": "The RPC network port",
+      "replaces": "9332",
+      "defaultValue": "9332"
+    },
+    "apiport": {
+      "type": "parameter",
+      "description": "The API network port",
+      "replaces": "9331",
+      "defaultValue": "9331"
+    },
+    "wsport": {
+      "type": "parameter",
+      "description": "The WS (Web Sockets) network port",
+      "replaces": "9330",
+      "defaultValue": "9330"
+    },
+    "cointype": {
+      "type": "parameter",
+      "description": "The BIP-44 number for the coin. See list: https://github.com/satoshilabs/slips/blob/master/slip-0044.md",
+      "replaces": "1981",
+      "defaultValue": "1981"
+    },
+    "pubkeyaddress": {
+      "type": "parameter",
+      "description": "The address prefix. See list: https://en.bitcoin.it/wiki/List_of_address_prefixes",
+      "replaces": "26",
+      "defaultValue": "26"
+    },
+    "scriptaddress": {
+      "type": "parameter",
+      "description": "The script prefix. See list: https://en.bitcoin.it/wiki/List_of_address_prefixes",
+      "replaces": "85",
+      "defaultValue": "85"
+    },
+    "blockreward": {
+      "type": "parameter",
+      "description": "Block reward for both PoW and PoS.",
+      "replaces": "45",
+      "defaultValue": "45"
+    },
+    "preminereward": {
+      "type": "parameter",
+      "description": "Premine reward to be given at block 2 to the mining wallet.",
+      "replaces": "5000000",
+      "defaultValue": "5000000"
+    },
+    "derivedRename": {
+      "type": "derived",
+      "description": "Replaces file name and text containing 'SampleCoin'",
+      "FileRename": "SampleCoin",
+      "replaces": "SampleCoin",
+      "valueSource": "name",
+      "valueTransform": "AfterLastDot",
+      "defaultValue": "CoinName"
+    },
+    "derivedRenameUpper": {
+      "type": "generated",
+      "generator": "casing",
+      "parameters": {
+        "source": "derivedRename",
+        "toLower": false
+      },
+      "replaces": "SAMPLECOIN"
+    },
+    "derivedRenameLower": {
+      "type": "generated",
+      "generator": "casing",
+      "parameters": {
+        "source": "derivedRename",
+        "toLower": true
+      },
+      "replaces": "samplecoin"
+    }
+  },
+  "Forms": {
+    "AfterLastDot": {
+      "identifier": "replace",
+      "pattern": "^.*\\.(?=[^\\.]+$)",
+      "replacement": ""
+    }
+  },
+  "guids": [
+    "9A19103F-16F7-4668-BE54-9A1E7A4F7556",
+    "ED51D950-AFFC-4638-850B-EACACA7756BD",
+    "F0DBDAA1-175D-4B90-89BA-F7C9CE46046B",
+    "7EFB962A-00F5-4FC5-8416-D2BB1ABA6D20"
+  ]
+}

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Blockcore.SampleCoin.Networks.Deployments;
 using Blockcore.SampleCoin.Networks.Policies;
+using Blockcore.SampleCoin.Networks.Utilities;
 using NBitcoin;
 using NBitcoin.BouncyCastle.Math;
 using NBitcoin.DataEncoders;
@@ -13,26 +14,16 @@ namespace Blockcore.SampleCoin.Networks
    {
       public SampleCoinRegTest()
       {
-         byte[] messageStart = new byte[4];
-         messageStart[0] = 0xcd;
-         messageStart[1] = 0xf2;
-         messageStart[2] = 0xc0;
-         messageStart[3] = 0xef;
-         uint magic = BitConverter.ToUInt32(messageStart, 0); // 0xefc0f2cd
-
-         Name = "SampleCoinRegTest";
          NetworkType = NetworkType.Regtest;
-         Magic = magic;
 
-         CoinTicker = "TXSC";
-
-         // TODO: set your ports and defaults
-         DefaultPort = 18444;
-         DefaultMaxOutboundConnections = 16;
-         DefaultMaxInboundConnections = 109;
-         DefaultRPCPort = 18442;
-         DefaultAPIPort = 38221;
-         DefaultBanTimeSeconds = 16000; // 500 (MaxReorg) * 64 (TargetSpacing) / 2 = 4 hours, 26 minutes and 40 seconds
+         Name = SampleCoinSetup.RegTest.Name;
+         CoinTicker = SampleCoinSetup.RegTest.CoinTicker;
+         Magic = SetupUtilities.ConvertToUInt32(SampleCoinSetup.Magic, true);
+         RootFolderName = SampleCoinSetup.RegTest.RootFolderName;
+         DefaultPort = SampleCoinSetup.RegTest.DefaultPort;
+         DefaultRPCPort = SampleCoinSetup.RegTest.DefaultRPCPort;
+         DefaultAPIPort = SampleCoinSetup.RegTest.DefaultAPIPort;
+         DefaultSignalRPort = SampleCoinSetup.RegTest.DefaultSignalRPort;
 
          var powLimit = new Target(new uint256("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
 
@@ -82,7 +73,7 @@ namespace Blockcore.SampleCoin.Networks
          Consensus = new NBitcoin.Consensus(
              consensusFactory: consensusFactory,
              consensusOptions: consensusOptions,
-             coinType: 105,
+             coinType: SampleCoinSetup.CoinType,
              hashGenesisBlock: genesisBlock.GetHash(),
              subsidyHalvingInterval: 210000,
              majorityEnforceBlockUpgrade: 750,
@@ -90,15 +81,15 @@ namespace Blockcore.SampleCoin.Networks
              majorityWindow: 1000,
              buriedDeployments: buriedDeployments,
              bip9Deployments: bip9Deployments,
-             bip34Hash: new uint256("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8"),
+             bip34Hash: null, // new uint256("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8"),
              minerConfirmationWindow: 2016, // nPowTargetTimespan / nPowTargetSpacing
              maxReorgLength: 500,
              defaultAssumeValid: null, // turn off assumevalid for regtest.
              maxMoney: long.MaxValue,
              coinbaseMaturity: 10,
              premineHeight: 2,
-             premineReward: Money.Coins(98000000),
-             proofOfWorkReward: Money.Coins(4),
+             premineReward: Money.Coins(SampleCoinSetup.PremineReward),
+             proofOfWorkReward: Money.Coins(SampleCoinSetup.BlockReward),
              targetTimespan: TimeSpan.FromSeconds(14 * 24 * 60 * 60), // two weeks
              targetSpacing: TimeSpan.FromSeconds(64),
              powAllowMinDifficultyBlocks: true,
@@ -110,7 +101,7 @@ namespace Blockcore.SampleCoin.Networks
              lastPowBlock: 12500,
              proofOfStakeLimit: new BigInteger(uint256.Parse("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff").ToBytes(false)),
              proofOfStakeLimitV2: new BigInteger(uint256.Parse("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff").ToBytes(false)),
-             proofOfStakeReward: Money.COIN,
+             proofOfStakeReward: Money.Coins(SampleCoinSetup.BlockReward),
              proofOfStakeTimestampMask: 0x0000003F // 64 sec
          );
 

@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json.schemastore.org/dotnetcli.host",
+  "symbolInfo": {
+    "rpcport": {
+      "longName": "rpcport",
+      "shortName": "rpc"
+    },
+    "apiport": {
+      "longName": "apiport",
+      "shortName": "api"
+    },
+    "wsport": {
+      "longName": "wsport",
+      "shortName": "ws"
+    },
+    "cointype": {
+      "longName": "cointype",
+      "shortName": "ct"
+    },
+    "pubkeyaddress": {
+      "longName": "pubkeyaddress",
+      "shortName": "pka"
+    },
+    "scriptaddress": {
+      "longName": "scriptaddress",
+      "shortName": "sa"
+    },
+    "blockreward": {
+      "longName": "blockreward",
+      "shortName": "br"
+    },
+    "preminereward": {
+      "longName": "preminereward",
+      "shortName": "pr"
+    }
+  }
+}

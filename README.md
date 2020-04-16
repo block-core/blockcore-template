@@ -44,3 +44,17 @@ dotnet new -i Blockcore.Coin.Template
 - [ ] Optional features
 
 
+### Template Development
+
+Install locally can be done by navigating into the "Blockcore.SampleCoin" sub-folder and running the following command:
+```
+dotnet new -i .
+```
+
+Then you can create a new project like instructed above.
+
+Also consider using the "-o" (--output) switch to easier quickly generate many instances for testing:
+
+```
+dotnet new blockcorecoin -c BTC -o CoinOne
+```
