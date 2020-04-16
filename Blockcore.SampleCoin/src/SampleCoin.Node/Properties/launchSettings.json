@@ -1,37 +1,37 @@
 {
    "profiles": {
-      "XSC (MAIN)": {
+      "BLC (MAIN)": {
          "commandName": "Project"
       },
-      "XSC (TEST)": {
+      "BLC (TEST)": {
          "commandName": "Project",
          "commandLineArgs": "-testnet"
       },
-      "XSC (MAIN/RPC)": {
+      "BLC (MAIN/RPC)": {
          "commandName": "Project",
          "commandLineArgs": "-server -rpcallowip=127.0.0.1 -rpcbind=127.0.0.1 -rpcpassword=rpcpassword -rpcuser=rpcuser"
       },
-      "XSC (TEST/RPC)": {
+      "BLC (TEST/RPC)": {
          "commandName": "Project",
          "commandLineArgs": "-server -rpcallowip=127.0.0.1 -rpcbind=127.0.0.1 -rpcpassword=rpcpassword -rpcuser=rpcuser -testnet"
       },
-      "XSC (MAIN/LOCAL/RPC)": {
+      "BLC (MAIN/LOCAL/RPC)": {
          "commandName": "Project",
          "commandLineArgs": "-server -rpcallowip=127.0.0.1 -rpcbind=127.0.0.1 -rpcpassword=rpcpassword -rpcuser=rpcuser -datadir=nodedata"
       },
-      "XSC (TEST/LOCAL/RPC)": {
+      "BLC (TEST/LOCAL/RPC)": {
          "commandName": "Project",
          "commandLineArgs": "-server -rpcallowip=127.0.0.1 -rpcbind=127.0.0.1 -rpcpassword=rpcpassword -rpcuser=rpcuser -datadir=nodedata -testnet"
       },
-      "XSC (MAIN/LOCAL/RPC/DEFAULT)": {
+      "BLC (MAIN/LOCAL/RPC/DEFAULT)": {
          "commandName": "Project",
          "commandLineArgs": "-server -rpcallowip=127.0.0.1 -rpcbind=127.0.0.1 -rpcpassword=rpcpassword -rpcuser=rpcuser -datadir=nodedata -defaultwalletname=default -defaultwalletpassword=default -unlockdefaultwallet -server"
       },
-      "XSC (TEST/LOCAL/RPC/DEFAULT)": {
+      "BLC (TEST/LOCAL/RPC/DEFAULT)": {
          "commandName": "Project",
          "commandLineArgs": "-server -rpcallowip=127.0.0.1 -rpcbind=127.0.0.1 -rpcpassword=rpcpassword -rpcuser=rpcuser -datadir=nodedata -defaultwalletname=default -defaultwalletpassword=default -unlockdefaultwallet -server -testnet"
       },
-      "XSC (TEST/NO ASSUME VALID)": {
+      "BLC (TEST/NO ASSUME VALID)": {
          "commandName": "Project",
          "commandLineArgs": "-testnet -assumevalid=0 -checkpoints=false"
       }

@@ -32,6 +32,10 @@
     "preminereward": {
       "longName": "preminereward",
       "shortName": "pr"
+    },
+    "lastpowblock": {
+      "longName": "lastpowblock",
+      "shortName": "pow"
     }
   }
 }

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29409.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blockcore.SampleCoin.Node", "src\Node\Blockcore.SampleCoin.Node.csproj", "{ED51D950-AFFC-4638-850B-EACACA7756BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blockcore.SampleCoin.Node", "src\SampleCoin.Node\Blockcore.SampleCoin.Node.csproj", "{ED51D950-AFFC-4638-850B-EACACA7756BD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blockcore.SampleCoin.Networks", "src\Networks\Blockcore.SampleCoin.Networks.csproj", "{F0DBDAA1-175D-4B90-89BA-F7C9CE46046B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blockcore.SampleCoin", "src\SampleCoin\Blockcore.SampleCoin.csproj", "{F0DBDAA1-175D-4B90-89BA-F7C9CE46046B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

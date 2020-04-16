@@ -7,7 +7,6 @@ using Blockcore.Features.MemoryPool.Rules;
 using Blockcore.SampleCoin.Networks.Deployments;
 using Blockcore.SampleCoin.Networks.Policies;
 using Blockcore.SampleCoin.Networks.Rules;
-using Blockcore.SampleCoin.Networks.Utilities;
 using NBitcoin;
 using NBitcoin.BouncyCastle.Math;
 using NBitcoin.DataEncoders;
@@ -24,7 +23,7 @@ namespace Blockcore.SampleCoin.Networks
 
          Name = SampleCoinSetup.Main.Name;
          CoinTicker = SampleCoinSetup.Main.CoinTicker;
-         Magic = SetupUtilities.ConvertToUInt32(SampleCoinSetup.Magic);
+         Magic = ConversionTools.ConvertToUInt32(SampleCoinSetup.Magic);
          RootFolderName = SampleCoinSetup.Main.RootFolderName;
          DefaultPort = SampleCoinSetup.Main.DefaultPort;
          DefaultRPCPort = SampleCoinSetup.Main.DefaultRPCPort;
@@ -121,7 +120,7 @@ namespace Blockcore.SampleCoin.Networks
              powLimit: new Target(new uint256("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")),
              minimumChainWork: null,
              isProofOfStake: true,
-             lastPowBlock: 12500,
+             lastPowBlock: SampleCoinSetup.LastPowBlock,
              proofOfStakeLimit: new BigInteger(uint256.Parse("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff").ToBytes(false)),
              proofOfStakeLimitV2: new BigInteger(uint256.Parse("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff").ToBytes(false)),
              proofOfStakeReward: Money.Coins(SampleCoinSetup.BlockReward),
@@ -132,9 +131,10 @@ namespace Blockcore.SampleCoin.Networks
 
          // TODO: Set your Base58Prefixes
          Base58Prefixes = new byte[12][];
-         Base58Prefixes[(int)Base58Type.PUBKEY_ADDRESS] = new byte[] { (63) };
-         Base58Prefixes[(int)Base58Type.SCRIPT_ADDRESS] = new byte[] { (125) };
+         Base58Prefixes[(int)Base58Type.PUBKEY_ADDRESS] = new byte[] { (SampleCoinSetup.Main.PubKeyAddress) };
+         Base58Prefixes[(int)Base58Type.SCRIPT_ADDRESS] = new byte[] { (SampleCoinSetup.Main.ScriptAddress) };
          Base58Prefixes[(int)Base58Type.SECRET_KEY] = new byte[] { (63 + 128) };
+
          Base58Prefixes[(int)Base58Type.ENCRYPTED_SECRET_KEY_NO_EC] = new byte[] { 0x01, 0x42 };
          Base58Prefixes[(int)Base58Type.ENCRYPTED_SECRET_KEY_EC] = new byte[] { 0x01, 0x43 };
          Base58Prefixes[(int)Base58Type.EXT_PUBLIC_KEY] = new byte[] { (0x04), (0x88), (0xB2), (0x1E) };
@@ -150,7 +150,7 @@ namespace Blockcore.SampleCoin.Networks
          };
 
          Bech32Encoders = new Bech32Encoder[2];
-         var encoder = new Bech32Encoder("XSC");
+         var encoder = new Bech32Encoder("BLC");
          Bech32Encoders[(int)Bech32Type.WITNESS_PUBKEY_ADDRESS] = encoder;
          Bech32Encoders[(int)Bech32Type.WITNESS_SCRIPT_ADDRESS] = encoder;
 

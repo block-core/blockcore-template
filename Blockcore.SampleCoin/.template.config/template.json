@@ -19,7 +19,7 @@
     "cointicker": {
       "type": "parameter",
       "description": "Replaces coin ticker symbol e.g. 'BTC'. See list: https://github.com/satoshilabs/slips/blob/master/slip-0044.md",
-      "replaces": "XSC",
+      "replaces": "BLC",
       "defaultValue": "BLC"
     },
     "magic": {
@@ -81,6 +81,12 @@
       "description": "Premine reward to be given at block 2 to the mining wallet.",
       "replaces": "5000000",
       "defaultValue": "5000000"
+    },
+    "lastpowblock": {
+      "type": "parameter",
+      "description": "Number of initial Proof-of-Work blocks that the network will accept.",
+      "replaces": "12500",
+      "defaultValue": "12500"
     },
     "derivedRename": {
       "type": "derived",

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Blockcore.SampleCoin.Networks.Utilities
+namespace Blockcore.SampleCoin.Networks
 {
-   public class SetupUtilities
+   public class ConversionTools
    {
       public static uint ConvertToUInt32(string magicText, bool reverse = false)
       {

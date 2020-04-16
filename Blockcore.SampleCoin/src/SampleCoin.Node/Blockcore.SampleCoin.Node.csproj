@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Networks\Blockcore.SampleCoin.Networks.csproj" />
+    <ProjectReference Include="..\SampleCoin\Blockcore.SampleCoin.csproj" />
   </ItemGroup>
 
 </Project>
