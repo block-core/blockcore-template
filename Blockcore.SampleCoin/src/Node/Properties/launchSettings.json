@@ -1,25 +1,37 @@
 {
    "profiles": {
-      "XSC": {
+      "XSC (MAIN)": {
          "commandName": "Project"
       },
-      "XSC (Test)": {
+      "XSC (TEST)": {
          "commandName": "Project",
          "commandLineArgs": "-testnet"
       },
-      "XSC (Test with Default wallet)": {
+      "XSC (MAIN/RPC)": {
          "commandName": "Project",
-         "commandLineArgs": "-testnet -rpcallowip=127.0.0.1 -defaultwalletname=default -defaultwalletpassword=default -unlockdefaultwallet -server -rpcpassword=rpcpassword -rpcuser=rpcuser"
+         "commandLineArgs": "-server -rpcallowip=127.0.0.1 -rpcbind=127.0.0.1 -rpcpassword=rpcpassword -rpcuser=rpcuser"
       },
-      "XSC (Test with RPC)": {
+      "XSC (TEST/RPC)": {
          "commandName": "Project",
-         "commandLineArgs": "-testnet -server -rpcpassword=rpcpassword -rpcuser=rpcuser"
+         "commandLineArgs": "-server -rpcallowip=127.0.0.1 -rpcbind=127.0.0.1 -rpcpassword=rpcpassword -rpcuser=rpcuser -testnet"
       },
-      "XSC (Test Keepalive 60s)": {
+      "XSC (MAIN/LOCAL/RPC)": {
          "commandName": "Project",
-         "commandLineArgs": "-testnet -keepalive=60"
+         "commandLineArgs": "-server -rpcallowip=127.0.0.1 -rpcbind=127.0.0.1 -rpcpassword=rpcpassword -rpcuser=rpcuser -datadir=nodedata"
       },
-      "XSC (Test No assumevalid)": {
+      "XSC (TEST/LOCAL/RPC)": {
+         "commandName": "Project",
+         "commandLineArgs": "-server -rpcallowip=127.0.0.1 -rpcbind=127.0.0.1 -rpcpassword=rpcpassword -rpcuser=rpcuser -datadir=nodedata -testnet"
+      },
+      "XSC (MAIN/LOCAL/RPC/DEFAULT)": {
+         "commandName": "Project",
+         "commandLineArgs": "-server -rpcallowip=127.0.0.1 -rpcbind=127.0.0.1 -rpcpassword=rpcpassword -rpcuser=rpcuser -datadir=nodedata -defaultwalletname=default -defaultwalletpassword=default -unlockdefaultwallet -server"
+      },
+      "XSC (TEST/LOCAL/RPC/DEFAULT)": {
+         "commandName": "Project",
+         "commandLineArgs": "-server -rpcallowip=127.0.0.1 -rpcbind=127.0.0.1 -rpcpassword=rpcpassword -rpcuser=rpcuser -datadir=nodedata -defaultwalletname=default -defaultwalletpassword=default -unlockdefaultwallet -server -testnet"
+      },
+      "XSC (TEST/NO ASSUME VALID)": {
          "commandName": "Project",
          "commandLineArgs": "-testnet -assumevalid=0 -checkpoints=false"
       }
