@@ -2,9 +2,9 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Blockcore.Coin.Template</id>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <description>
-      Creates a new blockchain based on the blockcore sample coin.
+      Creates a new blockchain based on blockcore technology.
     </description>
     <authors>Blockcore</authors>
     <license type="expression">MIT</license>

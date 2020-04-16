@@ -1,20 +1,20 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using NBitcoin;
 using NBitcoin.BitcoinCore;
 
 namespace Blockcore.SampleCoin.Networks.Policies
 {
-    /// <summary>
-    /// Blockcore sample coin-specific standard transaction definitions.
-    /// </summary>
-    public class SampleCoinStandardScriptsRegistry : StandardScriptsRegistry
-    {
-        // See MAX_OP_RETURN_RELAY in stratisX, <script.h>
-        public const int MaxOpReturnRelay = 40;
+   /// <summary>
+   /// Blockcore sample coin-specific standard transaction definitions.
+   /// </summary>
+   public class SampleCoinStandardScriptsRegistry : StandardScriptsRegistry
+   {
+      // See MAX_OP_RETURN_RELAY in stratisX, <script.h>
+      public const int MaxOpReturnRelay = 40;
 
-        // Need a network-specific version of the template list
-        private readonly List<ScriptTemplate> standardTemplates = new List<ScriptTemplate>
+      // Need a network-specific version of the template list
+      private readonly List<ScriptTemplate> standardTemplates = new List<ScriptTemplate>
         {
             PayToPubkeyHashTemplate.Instance,
             PayToPubkeyTemplate.Instance,
@@ -24,37 +24,37 @@ namespace Blockcore.SampleCoin.Networks.Policies
             PayToWitTemplate.Instance
         };
 
-        public override void RegisterStandardScriptTemplate(ScriptTemplate scriptTemplate)
-        {
-            if (!this.standardTemplates.Any(template => (template.Type == scriptTemplate.Type)))
-            {
-                this.standardTemplates.Add(scriptTemplate);
-            }
-        }
+      public override void RegisterStandardScriptTemplate(ScriptTemplate scriptTemplate)
+      {
+         if (!standardTemplates.Any(template => (template.Type == scriptTemplate.Type)))
+         {
+            standardTemplates.Add(scriptTemplate);
+         }
+      }
 
-        public override bool IsStandardTransaction(Transaction tx, Network network)
-        {
-            return base.IsStandardTransaction(tx, network);
-        }
+      public override bool IsStandardTransaction(Transaction tx, Network network)
+      {
+         return base.IsStandardTransaction(tx, network);
+      }
 
-        public override bool AreOutputsStandard(Network network, Transaction tx)
-        {
-            return base.AreOutputsStandard(network, tx);
-        }
+      public override bool AreOutputsStandard(Network network, Transaction tx)
+      {
+         return base.AreOutputsStandard(network, tx);
+      }
 
-        public override ScriptTemplate GetTemplateFromScriptPubKey(Script script)
-        {
-            return this.standardTemplates.FirstOrDefault(t => t.CheckScriptPubKey(script));
-        }
+      public override ScriptTemplate GetTemplateFromScriptPubKey(Script script)
+      {
+         return standardTemplates.FirstOrDefault(t => t.CheckScriptPubKey(script));
+      }
 
-        public override bool IsStandardScriptPubKey(Network network, Script scriptPubKey)
-        {
-            return base.IsStandardScriptPubKey(network, scriptPubKey);
-        }
+      public override bool IsStandardScriptPubKey(Network network, Script scriptPubKey)
+      {
+         return base.IsStandardScriptPubKey(network, scriptPubKey);
+      }
 
-        public override bool AreInputsStandard(Network network, Transaction tx, CoinsView coinsView)
-        {
-            return base.AreInputsStandard(network, tx, coinsView);
-        }
-    }
+      public override bool AreInputsStandard(Network network, Transaction tx, CoinsView coinsView)
+      {
+         return base.AreInputsStandard(network, tx, coinsView);
+      }
+   }
 }

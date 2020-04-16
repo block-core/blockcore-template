@@ -1,0 +1,27 @@
+{
+   "profiles": {
+      "XSC": {
+         "commandName": "Project"
+      },
+      "XSC (Test)": {
+         "commandName": "Project",
+         "commandLineArgs": "-testnet"
+      },
+      "XSC (Test with Default wallet)": {
+         "commandName": "Project",
+         "commandLineArgs": "-testnet -rpcallowip=127.0.0.1 -defaultwalletname=default -defaultwalletpassword=default -unlockdefaultwallet -server -rpcpassword=rpcpassword -rpcuser=rpcuser"
+      },
+      "XSC (Test with RPC)": {
+         "commandName": "Project",
+         "commandLineArgs": "-testnet -server -rpcpassword=rpcpassword -rpcuser=rpcuser"
+      },
+      "XSC (Test Keepalive 60s)": {
+         "commandName": "Project",
+         "commandLineArgs": "-testnet -keepalive=60"
+      },
+      "XSC (Test No assumevalid)": {
+         "commandName": "Project",
+         "commandLineArgs": "-testnet -assumevalid=0 -checkpoints=false"
+      }
+   }
+}
