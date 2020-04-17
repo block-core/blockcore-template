@@ -5,6 +5,9 @@
   <h3 align="center">
     Blockcore Samples and Templates
   </h3>
+  <p align="center">
+      <a href="https://github.com/block-core/blockcore-samples/actions"><img src="https://github.com/block-core/blockcore-samples/workflows/Build/badge.svg" /></a>
+  </p>
 </p>
 
 
