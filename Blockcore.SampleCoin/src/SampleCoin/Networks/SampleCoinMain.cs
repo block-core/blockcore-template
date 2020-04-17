@@ -124,7 +124,7 @@ namespace Blockcore.SampleCoin.Networks
              proofOfStakeLimit: new BigInteger(uint256.Parse("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff").ToBytes(false)),
              proofOfStakeLimitV2: new BigInteger(uint256.Parse("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff").ToBytes(false)),
              proofOfStakeReward: Money.Coins(SampleCoinSetup.PoSBlockReward),
-             proofOfStakeTimestampMask: 0x0000003F // 64 sec
+             proofOfStakeTimestampMask: SampleCoinSetup.ProofOfStakeTimestampMask
          );
 
          Consensus.PosEmptyCoinbase = true;
@@ -206,13 +206,15 @@ namespace Blockcore.SampleCoin.Networks
              .Register<CheckDifficultyHybridRule>()
 
              // rules that require the store to be loaded (coinview)
-             .Register<FetchUtxosetRule>()
+             //.Register<FetchUtxosetRule>()
+             .Register<LoadCoinviewRule>()
              .Register<TransactionDuplicationActivationRule>()
              .Register<CheckPosUtxosetRule>() // implements BIP68, MaxSigOps and BlockReward calculation
                                               // Place the PosColdStakingRule after the PosCoinviewRule to ensure that all input scripts have been evaluated
                                               // and that the "IsColdCoinStake" flag would have been set by the OP_CHECKCOLDSTAKEVERIFY opcode if applicable.
              .Register<PosColdStakingRule>()
-             .Register<PushUtxosetRule>();
+             // .Register<PushUtxosetRule>();
+             .Register<SaveCoinviewRule>();
       }
 
       protected void RegisterMempoolRules(IConsensus consensus)

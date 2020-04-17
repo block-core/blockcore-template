@@ -95,10 +95,11 @@ namespace Blockcore.SampleCoin.Networks
              proofOfStakeLimit: new BigInteger(uint256.Parse("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff").ToBytes(false)),
              proofOfStakeLimitV2: new BigInteger(uint256.Parse("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff").ToBytes(false)),
              proofOfStakeReward: Money.Coins(SampleCoinSetup.PoSBlockReward),
-             proofOfStakeTimestampMask: 0x0000003F // 64 sec
+             proofOfStakeTimestampMask: SampleCoinSetup.ProofOfStakeTimestampMask
          );
 
-         Consensus.PosEmptyCoinbase = true;
+         Consensus.PosEmptyCoinbase = SampleCoinSetup.IsPoSv3();
+         Consensus.PosUseTimeFieldInKernalHash = SampleCoinSetup.IsPoSv3();
 
          Base58Prefixes[(int)Base58Type.PUBKEY_ADDRESS] = new byte[] { (SampleCoinSetup.RegTest.PubKeyAddress) };
          Base58Prefixes[(int)Base58Type.SCRIPT_ADDRESS] = new byte[] { (SampleCoinSetup.RegTest.ScriptAddress) };

@@ -1,6 +1,6 @@
 chcp 65001
 dotnet new blockcorecoin ^
---output City8 ^
+--output City ^
 --cointicker CITY ^
 --magic "01-59-54-43" ^
 --cointype 1926 ^
@@ -9,6 +9,8 @@ dotnet new blockcorecoin ^
 --secretaddress 237 ^
 --pow-reward 2 ^
 --pos-reward 20 ^
+--pos-timestamp-mask "0000000F" ^
+--pos-version 3 ^
 --premine-reward 13736000000 ^
 --port 4333 ^
 --rpcport 4334 ^

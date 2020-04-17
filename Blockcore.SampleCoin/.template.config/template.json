@@ -98,6 +98,18 @@
       "replaces": "5555",
       "defaultValue": "55"
     },
+    "pos-timestamp-mask": {
+      "type": "parameter",
+      "description": "",
+      "replaces": "0000000F",
+      "defaultValue": "0000000F"
+    },
+    "pos-version": {
+      "type": "parameter",
+      "description": "",
+      "replaces": "4444",
+      "defaultValue": "4"
+    },
     "premine-reward": {
       "type": "parameter",
       "description": "Premine reward to be given at block 2 to the mining wallet.",

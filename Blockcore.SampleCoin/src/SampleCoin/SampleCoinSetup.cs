@@ -20,8 +20,11 @@ namespace Blockcore.SampleCoin
       public const int LastPowBlock = 12500;
       public const string GenesisText = "SALES AT U.S. STORES HIT CATASTROPHIC DEPTHS"; // The New York Times, 2020-04-16
       public static TimeSpan TargetSpacing = TimeSpan.FromSeconds(10 * 60);
+      public const uint ProofOfStakeTimestampMask = 0x0000000F; // 0x0000003F // 64 sec
+      public const int PoSVersion = 4444;
 
-      public class Main {
+      public class Main
+      {
          public const string Name = "SampleCoinMain";
          public const string RootFolderName = "SampleCoin";
          public const string CoinTicker = "BLC";
@@ -144,6 +147,16 @@ namespace Blockcore.SampleCoin
          {
             // TODO: Add checkpoints as the network progresses.
          };
+      }
+
+      public static bool IsPoSv3()
+      {
+         return PoSVersion == 3;
+      }
+
+      public static bool IsPoSv4()
+      {
+         return PoSVersion == 4;
       }
    }
 }

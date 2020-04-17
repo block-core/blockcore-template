@@ -109,7 +109,7 @@ namespace Blockcore.SampleCoin.Networks
              proofOfStakeLimit: new BigInteger(uint256.Parse("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff").ToBytes(false)),
              proofOfStakeLimitV2: new BigInteger(uint256.Parse("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff").ToBytes(false)),
              proofOfStakeReward: Money.Coins(SampleCoinSetup.PoSBlockReward),
-             proofOfStakeTimestampMask: 0x0000003F // 64 sec
+             proofOfStakeTimestampMask: SampleCoinSetup.ProofOfStakeTimestampMask
          );
 
          Consensus.PosEmptyCoinbase = true;
