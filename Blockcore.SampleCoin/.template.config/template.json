@@ -22,6 +22,16 @@
       "replaces": "BLC",
       "defaultValue": "BLC"
     },
+    "cointickerLower": {
+      "type": "generated",
+      "generator": "casing",
+      "parameters": {
+        "source": "cointicker",
+        "toLower": true
+      },
+      "replaces": "blc"
+    },
+
     "magic": {
       "type": "parameter",
       "description": "Should be in format 'F9-BE-B4-D9' (BTC)",
@@ -61,26 +71,44 @@
     "pubkeyaddress": {
       "type": "parameter",
       "description": "The address prefix. See list: https://en.bitcoin.it/wiki/List_of_address_prefixes",
-      "replaces": "26",
-      "defaultValue": "26"
+      "replaces": "222",
+      "defaultValue": "25"
     },
     "scriptaddress": {
       "type": "parameter",
       "description": "The script prefix. See list: https://en.bitcoin.it/wiki/List_of_address_prefixes",
-      "replaces": "85",
+      "replaces": "223",
       "defaultValue": "85"
     },
-    "blockreward": {
+    "secretaddress": {
+      "type": "parameter",
+      "description": "The script prefix. See list: https://en.bitcoin.it/wiki/List_of_address_prefixes",
+      "replaces": "224",
+      "defaultValue": "26"
+    },
+    "pow-reward": {
       "type": "parameter",
       "description": "Block reward for both PoW and PoS.",
-      "replaces": "45",
+      "replaces": "4545",
       "defaultValue": "45"
     },
-    "preminereward": {
+    "pos-reward": {
+      "type": "parameter",
+      "description": "Block reward for both PoW and PoS.",
+      "replaces": "5555",
+      "defaultValue": "55"
+    },
+    "premine-reward": {
       "type": "parameter",
       "description": "Premine reward to be given at block 2 to the mining wallet.",
       "replaces": "5000000",
       "defaultValue": "5000000"
+    },
+    "target-spacing": {
+      "type": "parameter",
+      "description": "",
+      "replaces": "10 * 60",
+      "defaultValue": "64"
     },
     "lastpowblock": {
       "type": "parameter",
@@ -98,13 +126,13 @@
 
     "genesis-time-main": {
       "type": "parameter",
-      "replaces": "1587084684",
-      "defaultValue": "1587084684"
+      "replaces": "1587118902",
+      "defaultValue": "1587118902"
     },
     "genesis-nonce-main": {
       "type": "parameter",
-      "replaces": "796685",
-      "defaultValue": "796685"
+      "replaces": "631024",
+      "defaultValue": "631024"
     },
     "genesis-bits-main": {
       "type": "parameter",
@@ -113,24 +141,24 @@
     },
     "genesis-block-hash-main": {
       "type": "parameter",
-      "replaces": "00000bfa445930bb5628f2b84bb31acd4ec689e1b6b8fb998c0ab6c32819feb8",
-      "defaultValue": "00000bfa445930bb5628f2b84bb31acd4ec689e1b6b8fb998c0ab6c32819feb8"
+      "replaces": "00000e8a284c34a684bde165d213f45b4a945a6c15118341d10f9616444dd140",
+      "defaultValue": "00000e8a284c34a684bde165d213f45b4a945a6c15118341d10f9616444dd140"
     },
     "genesis-merkle-hash-main": {
       "type": "parameter",
-      "replaces": "6e0a689b55dd9b1acffefb2ff8fcae065b7212858c7353be8cb43654ccd01629",
-      "defaultValue": "6e0a689b55dd9b1acffefb2ff8fcae065b7212858c7353be8cb43654ccd01629"
+      "replaces": "55e4f7372f1be36fa85860ccb7eb7623c28c0ec8dd348125bba20681b3cb0249",
+      "defaultValue": "55e4f7372f1be36fa85860ccb7eb7623c28c0ec8dd348125bba20681b3cb0249"
     },
 
     "genesis-time-regtest": {
       "type": "parameter",
-      "replaces": "1587084814",
-      "defaultValue": "1587084814"
+      "replaces": "1587118950",
+      "defaultValue": "1587118950"
     },
     "genesis-nonce-regtest": {
       "type": "parameter",
-      "replaces": "45048",
-      "defaultValue": "45048"
+      "replaces": "41450",
+      "defaultValue": "41450"
     },
     "genesis-bits-regtest": {
       "type": "parameter",
@@ -139,24 +167,24 @@
     },
     "genesis-block-hash-regtest": {
       "type": "parameter",
-      "replaces": "000001c15a6605c287f21cf1d071bfc7d5924601885712317259ecd28b85b845",
-      "defaultValue": "000001c15a6605c287f21cf1d071bfc7d5924601885712317259ecd28b85b845"
+      "replaces": "00008af47a491ddf7251cc05cd48f0272a9cfad8540de9400ea0506850f5ed93",
+      "defaultValue": "00008af47a491ddf7251cc05cd48f0272a9cfad8540de9400ea0506850f5ed93"
     },
     "genesis-merkle-hash-regtest": {
       "type": "parameter",
-      "replaces": "2bc0ebbc2c3065e2a9864b5bcf49ec6c4e20d84fbd10c70c044453e19395f500",
-      "defaultValue": "2bc0ebbc2c3065e2a9864b5bcf49ec6c4e20d84fbd10c70c044453e19395f500"
+      "replaces": "344960deee772f2b6f8cdc5f6fe86e0fe3146f43430849d8ca5b9b851bdcc58c",
+      "defaultValue": "344960deee772f2b6f8cdc5f6fe86e0fe3146f43430849d8ca5b9b851bdcc58c"
     },
 
     "genesis-time-test": {
       "type": "parameter",
-      "replaces": "1587084821",
-      "defaultValue": "1587084821"
+      "replaces": "1587118953",
+      "defaultValue": "1587118953"
     },
     "genesis-nonce-test": {
       "type": "parameter",
-      "replaces": "455",
-      "defaultValue": "455"
+      "replaces": "4834",
+      "defaultValue": "4834"
     },
     "genesis-bits-test": {
       "type": "parameter",
@@ -165,13 +193,44 @@
     },
     "genesis-block-hash-test": {
       "type": "parameter",
-      "replaces": "00000bfa445930bb5628f2b84bb31acd4ec689e1b6b8fb998c0ab6c32819feb8",
-      "defaultValue": "00000bfa445930bb5628f2b84bb31acd4ec689e1b6b8fb998c0ab6c32819feb8"
+      "replaces": "0009066a2c5b01b1b5ecb41267ce79a94954b75a5906a83221c587428f1e0bcd",
+      "defaultValue": "0009066a2c5b01b1b5ecb41267ce79a94954b75a5906a83221c587428f1e0bcd"
     },
     "genesis-merkle-hash-test": {
       "type": "parameter",
-      "replaces": "6e0a689b55dd9b1acffefb2ff8fcae065b7212858c7353be8cb43654ccd01629",
-      "defaultValue": "6e0a689b55dd9b1acffefb2ff8fcae065b7212858c7353be8cb43654ccd01629"
+      "replaces": "7d197d7cf32b63e01b1cf0279b5d3c8ed733770284554881038d253b6c34b3a8",
+      "defaultValue": "7d197d7cf32b63e01b1cf0279b5d3c8ed733770284554881038d253b6c34b3a8"
+    },
+
+    "seeddns1": {
+      "type": "parameter",
+      "description": "",
+      "replaces": "seed1.blc.blockcore.net",
+      "defaultValue": "seed1.blc.blockcore.net"
+    },
+    "seeddns2": {
+      "type": "parameter",
+      "description": "",
+      "replaces": "seed2.blc.blockcore.net",
+      "defaultValue": "seed2.blc.blockcore.net"
+    },
+    "seeddns3": {
+      "type": "parameter",
+      "description": "",
+      "replaces": "seed.blc.blockcore.net",
+      "defaultValue": "seed.blc.blockcore.net"
+    },
+    "seednode1": {
+      "type": "parameter",
+      "description": "",
+      "replaces": "89.10.227.34",
+      "defaultValue": "89.10.227.34"
+    },
+    "seednode2": {
+      "type": "parameter",
+      "description": "",
+      "replaces": "::1",
+      "defaultValue": "::1"
     },
 
     "derivedRename": {

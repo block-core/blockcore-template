@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using Blockcore.Features.Consensus.Rules.CommonRules;
 using Blockcore.Features.Consensus.Rules.ProvenHeaderRules;
 using Blockcore.Features.Consensus.Rules.UtxosetRules;
@@ -102,17 +103,17 @@ namespace Blockcore.SampleCoin.Networks
              majorityWindow: 1000,
              buriedDeployments: buriedDeployments,
              bip9Deployments: bip9Deployments,
-             bip34Hash: null, // new uint256("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8"),
+             bip34Hash: null,
              minerConfirmationWindow: 2016, // nPowTargetTimespan / nPowTargetSpacing
              maxReorgLength: 500,
-             defaultAssumeValid: null, // new uint256("0x6ad909469bc8fa15f48533fd30ae3217fceca413c0df69cf4ac314188f4df1c4"), // 1600000
+             defaultAssumeValid: null,
              maxMoney: long.MaxValue,
              coinbaseMaturity: 50,
              premineHeight: 2,
              premineReward: Money.Coins(SampleCoinSetup.PremineReward),
-             proofOfWorkReward: Money.Coins(SampleCoinSetup.BlockReward),
+             proofOfWorkReward: Money.Coins(SampleCoinSetup.PoWBlockReward),
              targetTimespan: TimeSpan.FromSeconds(14 * 24 * 60 * 60), // two weeks
-             targetSpacing: TimeSpan.FromSeconds(64),
+             targetSpacing: SampleCoinSetup.TargetSpacing,
              powAllowMinDifficultyBlocks: false,
              posNoRetargeting: false,
              powNoRetargeting: false,
@@ -122,7 +123,7 @@ namespace Blockcore.SampleCoin.Networks
              lastPowBlock: SampleCoinSetup.LastPowBlock,
              proofOfStakeLimit: new BigInteger(uint256.Parse("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff").ToBytes(false)),
              proofOfStakeLimitV2: new BigInteger(uint256.Parse("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff").ToBytes(false)),
-             proofOfStakeReward: Money.Coins(SampleCoinSetup.BlockReward),
+             proofOfStakeReward: Money.Coins(SampleCoinSetup.PoSBlockReward),
              proofOfStakeTimestampMask: 0x0000003F // 64 sec
          );
 
@@ -132,7 +133,7 @@ namespace Blockcore.SampleCoin.Networks
          Base58Prefixes = new byte[12][];
          Base58Prefixes[(int)Base58Type.PUBKEY_ADDRESS] = new byte[] { (SampleCoinSetup.Main.PubKeyAddress) };
          Base58Prefixes[(int)Base58Type.SCRIPT_ADDRESS] = new byte[] { (SampleCoinSetup.Main.ScriptAddress) };
-         Base58Prefixes[(int)Base58Type.SECRET_KEY] = new byte[] { (63 + 128) };
+         Base58Prefixes[(int)Base58Type.SECRET_KEY] = new byte[] { (SampleCoinSetup.Main.SecretAddress) };
 
          Base58Prefixes[(int)Base58Type.ENCRYPTED_SECRET_KEY_NO_EC] = new byte[] { 0x01, 0x42 };
          Base58Prefixes[(int)Base58Type.ENCRYPTED_SECRET_KEY_EC] = new byte[] { 0x01, 0x43 };
@@ -144,26 +145,14 @@ namespace Blockcore.SampleCoin.Networks
          Base58Prefixes[(int)Base58Type.ASSET_ID] = new byte[] { 23 };
          Base58Prefixes[(int)Base58Type.COLORED_ADDRESS] = new byte[] { 0x13 };
 
-         Checkpoints = new Dictionary<int, CheckpointInfo>
-         {
-         };
-
          Bech32Encoders = new Bech32Encoder[2];
-         var encoder = new Bech32Encoder("BLC");
+         var encoder = new Bech32Encoder(SampleCoinSetup.Main.CoinTicker);
          Bech32Encoders[(int)Bech32Type.WITNESS_PUBKEY_ADDRESS] = encoder;
          Bech32Encoders[(int)Bech32Type.WITNESS_SCRIPT_ADDRESS] = encoder;
 
-         DNSSeeds = new List<DNSSeedData>
-         {
-            // TODO: Add DNS seeds here
-            // new DNSSeedData("X.SampleCoin.com", "X.SampleCoin.com"),
-         };
-
-         SeedNodes = new List<NetworkAddress>
-         {
-            // TODO: Add seed nodes here
-            // new NetworkAddress(IPAddress.Parse("X.X.X.X"), 16178), 
-         };
+         Checkpoints = SampleCoinSetup.Main.Checkpoints;
+         DNSSeeds = SampleCoinSetup.Main.DNS;
+         SeedNodes = SampleCoinSetup.Main.Nodes;
 
          StandardScriptsRegistry = new SampleCoinStandardScriptsRegistry();
 

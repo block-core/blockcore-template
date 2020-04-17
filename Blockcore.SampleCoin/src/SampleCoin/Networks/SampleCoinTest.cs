@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using Blockcore.SampleCoin.Networks.Deployments;
 using Blockcore.SampleCoin.Networks.Policies;
 using NBitcoin;
@@ -95,9 +96,9 @@ namespace Blockcore.SampleCoin.Networks
              coinbaseMaturity: 10,
              premineHeight: 2,
              premineReward: Money.Coins(SampleCoinSetup.PremineReward),
-             proofOfWorkReward: Money.Coins(SampleCoinSetup.BlockReward),
+             proofOfWorkReward: Money.Coins(SampleCoinSetup.PoWBlockReward),
              targetTimespan: TimeSpan.FromSeconds(14 * 24 * 60 * 60), // two weeks
-             targetSpacing: TimeSpan.FromSeconds(64),
+             targetSpacing: SampleCoinSetup.TargetSpacing,
              powAllowMinDifficultyBlocks: false,
              posNoRetargeting: false,
              powNoRetargeting: false,
@@ -107,7 +108,7 @@ namespace Blockcore.SampleCoin.Networks
              lastPowBlock: SampleCoinSetup.LastPowBlock,
              proofOfStakeLimit: new BigInteger(uint256.Parse("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff").ToBytes(false)),
              proofOfStakeLimitV2: new BigInteger(uint256.Parse("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff").ToBytes(false)),
-             proofOfStakeReward: Money.Coins(SampleCoinSetup.BlockReward),
+             proofOfStakeReward: Money.Coins(SampleCoinSetup.PoSBlockReward),
              proofOfStakeTimestampMask: 0x0000003F // 64 sec
          );
 
@@ -122,25 +123,13 @@ namespace Blockcore.SampleCoin.Networks
          Base58Prefixes[(int)Base58Type.ASSET_ID] = new byte[] { 115 };
 
          Bech32Encoders = new Bech32Encoder[2];
-         var encoder = new Bech32Encoder("TBLC");
+         var encoder = new Bech32Encoder(SampleCoinSetup.RegTest.CoinTicker);
          Bech32Encoders[(int)Bech32Type.WITNESS_PUBKEY_ADDRESS] = encoder;
          Bech32Encoders[(int)Bech32Type.WITNESS_SCRIPT_ADDRESS] = encoder;
 
-         Checkpoints = new Dictionary<int, CheckpointInfo>
-         {
-         };
-
-         DNSSeeds = new List<DNSSeedData>
-         {
-            // TODO: Add DNS seeds here
-            // new DNSSeedData("X.SampleCoin.com", "X.SampleCoin.com"),
-         };
-
-         SeedNodes = new List<NetworkAddress>
-         {
-            // TODO: Add seed nodes here
-            // new NetworkAddress(IPAddress.Parse("X.X.X.X"), 16178), 
-         };
+         Checkpoints = SampleCoinSetup.Test.Checkpoints;
+         DNSSeeds = SampleCoinSetup.Test.DNS;
+         SeedNodes = SampleCoinSetup.Test.Nodes;
 
          StandardScriptsRegistry = new SampleCoinStandardScriptsRegistry();
 

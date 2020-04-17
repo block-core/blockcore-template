@@ -25,12 +25,20 @@
       "longName": "scriptaddress",
       "shortName": "sa"
     },
-    "blockreward": {
-      "longName": "blockreward",
-      "shortName": "br"
+    "secretaddress": {
+      "longName": "secretaddress",
+      "shortName": "sea"
     },
-    "preminereward": {
-      "longName": "preminereward",
+    "pow-reward": {
+      "longName": "pow-reward",
+      "shortName": "powr"
+    },
+    "pos-reward": {
+      "longName": "pos-reward",
+      "shortName": "posr"
+    },
+    "premine-reward": {
+      "longName": "premine-reward",
       "shortName": "pr"
     },
     "lastpowblock": {
