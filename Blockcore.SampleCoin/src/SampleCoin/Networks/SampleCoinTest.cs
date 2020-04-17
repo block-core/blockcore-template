@@ -24,22 +24,15 @@ namespace Blockcore.SampleCoin.Networks
          DefaultAPIPort = SampleCoinSetup.Test.DefaultAPIPort;
          DefaultSignalRPort = SampleCoinSetup.Test.DefaultSignalRPort;
 
-         var powLimit = new Target(new uint256("0000ffff00000000000000000000000000000000000000000000000000000000"));
-
          var consensusFactory = new PosConsensusFactory();
 
-         // Create the genesis block.
-         GenesisTime = 1470467000;
-         GenesisNonce = 1831645;
-         GenesisBits = 0x1e0fffff;
-         GenesisVersion = 1;
-         GenesisReward = Money.Zero;
-
-         Block genesisBlock = CreateGenesisBlock(consensusFactory, GenesisTime, GenesisNonce, GenesisBits, GenesisVersion, GenesisReward);
-
-         genesisBlock.Header.Time = 1493909211;
-         genesisBlock.Header.Nonce = 2433759;
-         genesisBlock.Header.Bits = powLimit;
+         Block genesisBlock = CreateGenesisBlock(consensusFactory,
+            SampleCoinSetup.Test.GenesisTime,
+            SampleCoinSetup.Test.GenesisNonce,
+            SampleCoinSetup.Test.GenesisBits,
+            SampleCoinSetup.Test.GenesisVersion,
+            SampleCoinSetup.Test.GenesisReward,
+            SampleCoinSetup.GenesisText);
 
          Genesis = genesisBlock;
 
@@ -108,7 +101,7 @@ namespace Blockcore.SampleCoin.Networks
              powAllowMinDifficultyBlocks: false,
              posNoRetargeting: false,
              powNoRetargeting: false,
-             powLimit: powLimit,
+             powLimit: new Target(new uint256("000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")),
              minimumChainWork: null,
              isProofOfStake: true,
              lastPowBlock: SampleCoinSetup.LastPowBlock,

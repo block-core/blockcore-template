@@ -88,6 +88,92 @@
       "replaces": "12500",
       "defaultValue": "12500"
     },
+    "genesistext": {
+      "type": "parameter",
+      "description": "Unique text for the coinbase.",
+      "replaces": "SALES AT U.S. STORES HIT CATASTROPHIC DEPTHS",
+      "defaultValue": "SALES AT U.S. STORES HIT CATASTROPHIC DEPTHS"
+    },
+
+
+    "genesis-time-main": {
+      "type": "parameter",
+      "replaces": "1587084684",
+      "defaultValue": "1587084684"
+    },
+    "genesis-nonce-main": {
+      "type": "parameter",
+      "replaces": "796685",
+      "defaultValue": "796685"
+    },
+    "genesis-bits-main": {
+      "type": "parameter",
+      "replaces": "1E0FFFFF",
+      "defaultValue": "1E0FFFFF"
+    },
+    "genesis-block-hash-main": {
+      "type": "parameter",
+      "replaces": "00000bfa445930bb5628f2b84bb31acd4ec689e1b6b8fb998c0ab6c32819feb8",
+      "defaultValue": "00000bfa445930bb5628f2b84bb31acd4ec689e1b6b8fb998c0ab6c32819feb8"
+    },
+    "genesis-merkle-hash-main": {
+      "type": "parameter",
+      "replaces": "6e0a689b55dd9b1acffefb2ff8fcae065b7212858c7353be8cb43654ccd01629",
+      "defaultValue": "6e0a689b55dd9b1acffefb2ff8fcae065b7212858c7353be8cb43654ccd01629"
+    },
+
+    "genesis-time-regtest": {
+      "type": "parameter",
+      "replaces": "1587084814",
+      "defaultValue": "1587084814"
+    },
+    "genesis-nonce-regtest": {
+      "type": "parameter",
+      "replaces": "45048",
+      "defaultValue": "45048"
+    },
+    "genesis-bits-regtest": {
+      "type": "parameter",
+      "replaces": "1F00FFFF",
+      "defaultValue": "1F00FFFF"
+    },
+    "genesis-block-hash-regtest": {
+      "type": "parameter",
+      "replaces": "000001c15a6605c287f21cf1d071bfc7d5924601885712317259ecd28b85b845",
+      "defaultValue": "000001c15a6605c287f21cf1d071bfc7d5924601885712317259ecd28b85b845"
+    },
+    "genesis-merkle-hash-regtest": {
+      "type": "parameter",
+      "replaces": "2bc0ebbc2c3065e2a9864b5bcf49ec6c4e20d84fbd10c70c044453e19395f500",
+      "defaultValue": "2bc0ebbc2c3065e2a9864b5bcf49ec6c4e20d84fbd10c70c044453e19395f500"
+    },
+
+    "genesis-time-test": {
+      "type": "parameter",
+      "replaces": "1587084821",
+      "defaultValue": "1587084821"
+    },
+    "genesis-nonce-test": {
+      "type": "parameter",
+      "replaces": "455",
+      "defaultValue": "455"
+    },
+    "genesis-bits-test": {
+      "type": "parameter",
+      "replaces": "1F0FFFFF",
+      "defaultValue": "1F0FFFFF"
+    },
+    "genesis-block-hash-test": {
+      "type": "parameter",
+      "replaces": "00000bfa445930bb5628f2b84bb31acd4ec689e1b6b8fb998c0ab6c32819feb8",
+      "defaultValue": "00000bfa445930bb5628f2b84bb31acd4ec689e1b6b8fb998c0ab6c32819feb8"
+    },
+    "genesis-merkle-hash-test": {
+      "type": "parameter",
+      "replaces": "6e0a689b55dd9b1acffefb2ff8fcae065b7212858c7353be8cb43654ccd01629",
+      "defaultValue": "6e0a689b55dd9b1acffefb2ff8fcae065b7212858c7353be8cb43654ccd01629"
+    },
+
     "derivedRename": {
       "type": "derived",
       "description": "Replaces file name and text containing 'SampleCoin'",

@@ -15,6 +15,7 @@ using Blockcore.Features.SignalR;
 using Blockcore.Features.SignalR.Broadcasters;
 using Blockcore.Features.SignalR.Events;
 using Blockcore.Utilities;
+using NBitcoin;
 using NBitcoin.Protocol;
 
 namespace Blockcore.SampleCoin.Daemon

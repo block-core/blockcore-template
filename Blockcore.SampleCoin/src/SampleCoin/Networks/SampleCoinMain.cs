@@ -41,14 +41,13 @@ namespace Blockcore.SampleCoin.Networks
 
          var consensusFactory = new PosConsensusFactory();
 
-         // Create the genesis block.
-         GenesisTime = 1470467000;
-         GenesisNonce = 1831645;
-         GenesisBits = 0x1e0fffff;
-         GenesisVersion = 1;
-         GenesisReward = Money.Zero;
-
-         Block genesisBlock = CreateGenesisBlock(consensusFactory, GenesisTime, GenesisNonce, GenesisBits, GenesisVersion, GenesisReward);
+         Block genesisBlock = CreateGenesisBlock(consensusFactory,
+            SampleCoinSetup.Main.GenesisTime,
+            SampleCoinSetup.Main.GenesisNonce,
+            SampleCoinSetup.Main.GenesisBits,
+            SampleCoinSetup.Main.GenesisVersion,
+            SampleCoinSetup.Main.GenesisReward,
+            SampleCoinSetup.GenesisText);
 
          Genesis = genesisBlock;
 
@@ -172,8 +171,8 @@ namespace Blockcore.SampleCoin.Networks
          Assert(DefaultBanTimeSeconds <= Consensus.MaxReorgLength * 64 / 2);
 
          // TODO: update RHS to match HashGenesisBlock & HashMerkleRoot
-         Assert(Consensus.HashGenesisBlock == uint256.Parse("0x0000066e91e46e5a264d42c89e1204963b2ee6be230b443e9159020539d972af"));
-         Assert(Genesis.Header.HashMerkleRoot == uint256.Parse("0x65a26bc20b0351aebf05829daefa8f7db2f800623439f3c114257c91447f1518"));
+         Assert(Consensus.HashGenesisBlock == uint256.Parse(SampleCoinSetup.Main.HashGenesisBlock));
+         Assert(Genesis.Header.HashMerkleRoot == uint256.Parse(SampleCoinSetup.Main.HashMerkleRoot));
 
          RegisterRules(Consensus);
          RegisterMempoolRules(Consensus);
@@ -244,11 +243,8 @@ namespace Blockcore.SampleCoin.Networks
             };
       }
 
-      protected static Block CreateGenesisBlock(ConsensusFactory consensusFactory, uint nTime, uint nNonce, uint nBits, int nVersion, Money genesisReward)
+      protected static Block CreateGenesisBlock(ConsensusFactory consensusFactory, uint nTime, uint nNonce, uint nBits, int nVersion, Money genesisReward, string genesisText)
       {
-         // TODO: configure genesis block
-         string pszTimestamp = "PUT UNIQUE STRING HERE";
-
          Transaction txNew = consensusFactory.CreateTransaction();
          txNew.Version = 1;
 
@@ -263,7 +259,7 @@ namespace Blockcore.SampleCoin.Networks
             {
                Code = (OpcodeType)0x1,
                PushData = new[] { (byte)42 }
-            }, Op.GetPushOp(Encoders.ASCII.DecodeData(pszTimestamp)))
+            }, Op.GetPushOp(Encoders.ASCII.DecodeData(genesisText)))
          });
 
          txNew.AddOutput(new TxOut()

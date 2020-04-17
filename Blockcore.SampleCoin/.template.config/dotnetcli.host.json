@@ -36,6 +36,10 @@
     "lastpowblock": {
       "longName": "lastpowblock",
       "shortName": "pow"
+    },
+    "genesistext": {
+      "longName": "genesistext",
+      "shortName": "text"
     }
   }
 }
