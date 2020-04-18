@@ -1,12 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Net;
-using Blockcore.SampleCoin.Networks.Deployments;
 using Blockcore.SampleCoin.Networks.Policies;
 using NBitcoin;
 using NBitcoin.BouncyCastle.Math;
 using NBitcoin.DataEncoders;
-using NBitcoin.Protocol;
 
 namespace Blockcore.SampleCoin.Networks
 {
@@ -54,29 +50,6 @@ namespace Blockcore.SampleCoin.Networks
             [BuriedDeployments.BIP66] = 0
          };
 
-         var bip9Deployments = new SampleCoinBIP9Deployments()
-         {
-            [SampleCoinBIP9Deployments.TestDummy] = new BIP9DeploymentsParameters("TestDummy", 28,
-                 new DateTime(2019, 6, 1, 0, 0, 0, DateTimeKind.Utc),
-                 new DateTime(2020, 6, 1, 0, 0, 0, DateTimeKind.Utc),
-                 BIP9DeploymentsParameters.DefaultTestnetThreshold),
-
-            [SampleCoinBIP9Deployments.CSV] = new BIP9DeploymentsParameters("CSV", 0,
-                 new DateTime(2019, 6, 1, 0, 0, 0, DateTimeKind.Utc),
-                 new DateTime(2020, 6, 1, 0, 0, 0, DateTimeKind.Utc),
-                 BIP9DeploymentsParameters.DefaultTestnetThreshold),
-
-            [SampleCoinBIP9Deployments.Segwit] = new BIP9DeploymentsParameters("Segwit", 1,
-                 new DateTime(2019, 6, 1, 0, 0, 0, DateTimeKind.Utc),
-                 new DateTime(2020, 6, 1, 0, 0, 0, DateTimeKind.Utc),
-                 BIP9DeploymentsParameters.DefaultTestnetThreshold),
-
-            [SampleCoinBIP9Deployments.ColdStaking] = new BIP9DeploymentsParameters("ColdStaking", 2,
-                 new DateTime(2018, 11, 1, 0, 0, 0, DateTimeKind.Utc),
-                 new DateTime(2019, 6, 1, 0, 0, 0, DateTimeKind.Utc),
-                 BIP9DeploymentsParameters.DefaultTestnetThreshold)
-         };
-
          Consensus = new NBitcoin.Consensus(
              consensusFactory: consensusFactory,
              consensusOptions: consensusOptions,
@@ -87,11 +60,11 @@ namespace Blockcore.SampleCoin.Networks
              majorityRejectBlockOutdated: 950,
              majorityWindow: 1000,
              buriedDeployments: buriedDeployments,
-             bip9Deployments: bip9Deployments,
-             bip34Hash: null, // new uint256("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8"),
+             bip9Deployments: new NoBIP9Deployments(),
+             bip34Hash: null,
              minerConfirmationWindow: 2016, // nPowTargetTimespan / nPowTargetSpacing
              maxReorgLength: 500,
-             defaultAssumeValid: null, // new uint256("0x690e7e30ae3fa6c10855db0f8bc10110a54f5c73019f5581ee038186154397d0"), // 1100000
+             defaultAssumeValid: null,
              maxMoney: long.MaxValue,
              coinbaseMaturity: 10,
              premineHeight: 2,
@@ -111,8 +84,6 @@ namespace Blockcore.SampleCoin.Networks
              proofOfStakeReward: Money.Coins(SampleCoinSetup.PoSBlockReward),
              proofOfStakeTimestampMask: SampleCoinSetup.ProofOfStakeTimestampMask
          );
-
-         Consensus.PosEmptyCoinbase = true;
 
          Base58Prefixes[(int)Base58Type.PUBKEY_ADDRESS] = new byte[] { (SampleCoinSetup.RegTest.PubKeyAddress) };
          Base58Prefixes[(int)Base58Type.SCRIPT_ADDRESS] = new byte[] { (SampleCoinSetup.RegTest.ScriptAddress) };
@@ -136,8 +107,8 @@ namespace Blockcore.SampleCoin.Networks
          // 64 below should be changed to TargetSpacingSeconds when we move that field.
          Assert(DefaultBanTimeSeconds <= Consensus.MaxReorgLength * 64 / 2);
 
-         // TODO: update RHS to match HashGenesisBlock
-         Assert(Consensus.HashGenesisBlock == uint256.Parse("0x00000e246d7b73b88c9ab55f2e5e94d9e22d471def3df5ea448f5576b1d156b9"));
+         Assert(Consensus.HashGenesisBlock == uint256.Parse(SampleCoinSetup.Test.HashGenesisBlock));
+         Assert(Genesis.Header.HashMerkleRoot == uint256.Parse(SampleCoinSetup.Test.HashMerkleRoot));
 
          RegisterRules(Consensus);
          RegisterMempoolRules(Consensus);

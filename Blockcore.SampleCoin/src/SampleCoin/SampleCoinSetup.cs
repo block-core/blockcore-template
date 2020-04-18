@@ -26,7 +26,7 @@ namespace Blockcore.SampleCoin
       public class Main
       {
          public const string Name = "SampleCoinMain";
-         public const string RootFolderName = "SampleCoin";
+         public const string RootFolderName = "samplecoin";
          public const string CoinTicker = "BLC";
          public const int DefaultPort = 9333;
          public const int DefaultRPCPort = 9332;

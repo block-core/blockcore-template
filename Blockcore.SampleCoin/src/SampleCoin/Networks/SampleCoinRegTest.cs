@@ -1,12 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Net;
-using Blockcore.SampleCoin.Networks.Deployments;
 using Blockcore.SampleCoin.Networks.Policies;
 using NBitcoin;
 using NBitcoin.BouncyCastle.Math;
 using NBitcoin.DataEncoders;
-using NBitcoin.Protocol;
 
 namespace Blockcore.SampleCoin.Networks
 {
@@ -54,15 +50,6 @@ namespace Blockcore.SampleCoin.Networks
             [BuriedDeployments.BIP66] = 0
          };
 
-         var bip9Deployments = new SampleCoinBIP9Deployments()
-         {
-            // Always active on SampleCoinRegTest.
-            [SampleCoinBIP9Deployments.TestDummy] = new BIP9DeploymentsParameters("TestDummy", 28, BIP9DeploymentsParameters.AlwaysActive, 999999999, BIP9DeploymentsParameters.AlwaysActive),
-            [SampleCoinBIP9Deployments.CSV] = new BIP9DeploymentsParameters("CSV", 0, BIP9DeploymentsParameters.AlwaysActive, 999999999, BIP9DeploymentsParameters.AlwaysActive),
-            [SampleCoinBIP9Deployments.Segwit] = new BIP9DeploymentsParameters("Segwit", 1, BIP9DeploymentsParameters.AlwaysActive, 999999999, BIP9DeploymentsParameters.AlwaysActive),
-            [SampleCoinBIP9Deployments.ColdStaking] = new BIP9DeploymentsParameters("ColdStaking", 2, BIP9DeploymentsParameters.AlwaysActive, 999999999, BIP9DeploymentsParameters.AlwaysActive),
-         };
-
          Consensus = new NBitcoin.Consensus(
              consensusFactory: consensusFactory,
              consensusOptions: consensusOptions,
@@ -73,11 +60,11 @@ namespace Blockcore.SampleCoin.Networks
              majorityRejectBlockOutdated: 950,
              majorityWindow: 1000,
              buriedDeployments: buriedDeployments,
-             bip9Deployments: bip9Deployments,
-             bip34Hash: null, // new uint256("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8"),
+             bip9Deployments: new NoBIP9Deployments(),
+             bip34Hash: null,
              minerConfirmationWindow: 2016, // nPowTargetTimespan / nPowTargetSpacing
              maxReorgLength: 500,
-             defaultAssumeValid: null, // turn off assumevalid for regtest.
+             defaultAssumeValid: null,
              maxMoney: long.MaxValue,
              coinbaseMaturity: 10,
              premineHeight: 2,
@@ -97,9 +84,6 @@ namespace Blockcore.SampleCoin.Networks
              proofOfStakeReward: Money.Coins(SampleCoinSetup.PoSBlockReward),
              proofOfStakeTimestampMask: SampleCoinSetup.ProofOfStakeTimestampMask
          );
-
-         Consensus.PosEmptyCoinbase = SampleCoinSetup.IsPoSv3();
-         Consensus.PosUseTimeFieldInKernalHash = SampleCoinSetup.IsPoSv3();
 
          Base58Prefixes[(int)Base58Type.PUBKEY_ADDRESS] = new byte[] { (SampleCoinSetup.RegTest.PubKeyAddress) };
          Base58Prefixes[(int)Base58Type.SCRIPT_ADDRESS] = new byte[] { (SampleCoinSetup.RegTest.ScriptAddress) };
@@ -123,8 +107,8 @@ namespace Blockcore.SampleCoin.Networks
          // 64 below should be changed to TargetSpacingSeconds when we move that field.
          Assert(DefaultBanTimeSeconds <= Consensus.MaxReorgLength * 64 / 2);
 
-         // TODO: update RHS to match HashGenesisBlock
-         Assert(Consensus.HashGenesisBlock == uint256.Parse("0x93925104d664314f581bc7ecb7b4bad07bcfabd1cfce4256dbd2faddcf53bd1f"));
+         Assert(Consensus.HashGenesisBlock == uint256.Parse(SampleCoinSetup.RegTest.HashGenesisBlock));
+         Assert(Genesis.Header.HashMerkleRoot == uint256.Parse(SampleCoinSetup.RegTest.HashMerkleRoot));
 
          RegisterRules(Consensus);
          RegisterMempoolRules(Consensus);

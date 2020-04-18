@@ -16,7 +16,7 @@ dotnet new blockcorecoin ^
 --rpcport 4334 ^
 --apiport 4335 ^
 --wsport 4336 ^
---target-spacing 60 ^
+--target-spacing 64 ^
 --lastpowblock 2500 ^
 --seeddns1 "seed.city-chain.org" ^
 --seeddns2 "seed.citychain.foundation" ^

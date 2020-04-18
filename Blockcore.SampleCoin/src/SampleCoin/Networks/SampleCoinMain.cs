@@ -1,17 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Net;
 using Blockcore.Features.Consensus.Rules.CommonRules;
 using Blockcore.Features.Consensus.Rules.ProvenHeaderRules;
 using Blockcore.Features.Consensus.Rules.UtxosetRules;
 using Blockcore.Features.MemoryPool.Rules;
-using Blockcore.SampleCoin.Networks.Deployments;
 using Blockcore.SampleCoin.Networks.Policies;
 using Blockcore.SampleCoin.Networks.Rules;
 using NBitcoin;
 using NBitcoin.BouncyCastle.Math;
 using NBitcoin.DataEncoders;
-using NBitcoin.Protocol;
 
 namespace Blockcore.SampleCoin.Networks
 {
@@ -69,29 +66,6 @@ namespace Blockcore.SampleCoin.Networks
             [BuriedDeployments.BIP66] = 0
          };
 
-         var bip9Deployments = new SampleCoinBIP9Deployments()
-         {
-            [SampleCoinBIP9Deployments.TestDummy] = new BIP9DeploymentsParameters("TestDummy", 28,
-                 new DateTime(2019, 10, 1, 0, 0, 0, DateTimeKind.Utc),
-                 new DateTime(2020, 10, 1, 0, 0, 0, DateTimeKind.Utc),
-                 BIP9DeploymentsParameters.DefaultMainnetThreshold),
-
-            [SampleCoinBIP9Deployments.CSV] = new BIP9DeploymentsParameters("CSV", 0,
-                 new DateTime(2019, 10, 1, 0, 0, 0, DateTimeKind.Utc),
-                 new DateTime(2020, 10, 1, 0, 0, 0, DateTimeKind.Utc),
-                 BIP9DeploymentsParameters.DefaultMainnetThreshold),
-
-            [SampleCoinBIP9Deployments.Segwit] = new BIP9DeploymentsParameters("Segwit", 1,
-                 new DateTime(2019, 10, 1, 0, 0, 0, DateTimeKind.Utc),
-                 new DateTime(2020, 10, 1, 0, 0, 0, DateTimeKind.Utc),
-                 BIP9DeploymentsParameters.DefaultMainnetThreshold),
-
-            [SampleCoinBIP9Deployments.ColdStaking] = new BIP9DeploymentsParameters("ColdStaking", 2,
-                 new DateTime(2019, 12, 2, 0, 0, 0, DateTimeKind.Utc),
-                 new DateTime(2020, 12, 2, 0, 0, 0, DateTimeKind.Utc),
-                 BIP9DeploymentsParameters.DefaultMainnetThreshold)
-         };
-
          Consensus = new NBitcoin.Consensus(
              consensusFactory: consensusFactory,
              consensusOptions: consensusOptions,
@@ -102,7 +76,7 @@ namespace Blockcore.SampleCoin.Networks
              majorityRejectBlockOutdated: 950,
              majorityWindow: 1000,
              buriedDeployments: buriedDeployments,
-             bip9Deployments: bip9Deployments,
+             bip9Deployments: new NoBIP9Deployments(),
              bip34Hash: null,
              minerConfirmationWindow: 2016, // nPowTargetTimespan / nPowTargetSpacing
              maxReorgLength: 500,
@@ -127,7 +101,8 @@ namespace Blockcore.SampleCoin.Networks
              proofOfStakeTimestampMask: SampleCoinSetup.ProofOfStakeTimestampMask
          );
 
-         Consensus.PosEmptyCoinbase = true;
+         Consensus.PosEmptyCoinbase = SampleCoinSetup.IsPoSv3();
+         Consensus.PosUseTimeFieldInKernalHash = SampleCoinSetup.IsPoSv3();
 
          // TODO: Set your Base58Prefixes
          Base58Prefixes = new byte[12][];
@@ -159,7 +134,6 @@ namespace Blockcore.SampleCoin.Networks
          // 64 below should be changed to TargetSpacingSeconds when we move that field.
          Assert(DefaultBanTimeSeconds <= Consensus.MaxReorgLength * 64 / 2);
 
-         // TODO: update RHS to match HashGenesisBlock & HashMerkleRoot
          Assert(Consensus.HashGenesisBlock == uint256.Parse(SampleCoinSetup.Main.HashGenesisBlock));
          Assert(Genesis.Header.HashMerkleRoot == uint256.Parse(SampleCoinSetup.Main.HashMerkleRoot));
 
@@ -172,7 +146,7 @@ namespace Blockcore.SampleCoin.Networks
          consensus.ConsensusRules
              .Register<HeaderTimeChecksRule>()
              .Register<HeaderTimeChecksPosRule>()
-             .Register<SampleCoinPosFutureDriftRule>()
+             .Register<PosFutureDriftRule>()
              .Register<CheckDifficultyPosRule>()
              .Register<SampleCoinHeaderVersionRule>()
              .Register<ProvenHeaderSizeRule>()
