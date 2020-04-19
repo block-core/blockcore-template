@@ -180,15 +180,14 @@ namespace Blockcore.SampleCoin.Networks
              .Register<CheckDifficultyHybridRule>()
 
              // rules that require the store to be loaded (coinview)
-             //.Register<FetchUtxosetRule>()
-             .Register<LoadCoinviewRule>()
+             .Register<FetchUtxosetRule>()
              .Register<TransactionDuplicationActivationRule>()
              .Register<CheckPosUtxosetRule>() // implements BIP68, MaxSigOps and BlockReward calculation
                                               // Place the PosColdStakingRule after the PosCoinviewRule to ensure that all input scripts have been evaluated
                                               // and that the "IsColdCoinStake" flag would have been set by the OP_CHECKCOLDSTAKEVERIFY opcode if applicable.
              .Register<PosColdStakingRule>()
-             // .Register<PushUtxosetRule>();
-             .Register<SaveCoinviewRule>();
+             .Register<PushUtxosetRule>()
+             .Register<FlushUtxosetRule>();
       }
 
       protected void RegisterMempoolRules(IConsensus consensus)
