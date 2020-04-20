@@ -38,30 +38,82 @@
       "replaces": "02-4B-4C-42",
       "defaultValue": "02-4B-4C-42"
     },
+
     "port": {
       "type": "parameter",
       "description": "The P2P network port",
-      "replaces": "9333",
+      "replaces": "10000",
       "defaultValue": "9333"
     },
     "rpcport": {
       "type": "parameter",
       "description": "The RPC network port",
-      "replaces": "9332",
+      "replaces": "10001",
       "defaultValue": "9332"
     },
     "apiport": {
       "type": "parameter",
       "description": "The API network port",
-      "replaces": "9331",
+      "replaces": "10002",
       "defaultValue": "9331"
     },
     "wsport": {
       "type": "parameter",
       "description": "The WS (Web Sockets) network port",
-      "replaces": "9330",
+      "replaces": "10003",
       "defaultValue": "9330"
     },
+
+    "port-regtest": {
+      "type": "parameter",
+      "description": "The P2P network port",
+      "replaces": "20000",
+      "defaultValue": "9333"
+    },
+    "rpcport-regtest": {
+      "type": "parameter",
+      "description": "The RPC network port",
+      "replaces": "20001",
+      "defaultValue": "9332"
+    },
+    "apiport-regtest": {
+      "type": "parameter",
+      "description": "The API network port",
+      "replaces": "20002",
+      "defaultValue": "9331"
+    },
+    "wsport-regtest": {
+      "type": "parameter",
+      "description": "The WS (Web Sockets) network port",
+      "replaces": "20003",
+      "defaultValue": "9330"
+    },
+
+    "port-test": {
+      "type": "parameter",
+      "description": "The P2P network port",
+      "replaces": "30000",
+      "defaultValue": "9333"
+    },
+    "rpcport-test": {
+      "type": "parameter",
+      "description": "The RPC network port",
+      "replaces": "30001",
+      "defaultValue": "9332"
+    },
+    "apiport-test": {
+      "type": "parameter",
+      "description": "The API network port",
+      "replaces": "30002",
+      "defaultValue": "9331"
+    },
+    "wsport-test": {
+      "type": "parameter",
+      "description": "The WS (Web Sockets) network port",
+      "replaces": "30003",
+      "defaultValue": "9330"
+    },
+
     "cointype": {
       "type": "parameter",
       "description": "The BIP-44 number for the coin. See list: https://github.com/satoshilabs/slips/blob/master/slip-0044.md",
