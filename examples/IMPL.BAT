@@ -34,6 +34,7 @@ dotnet new blockcorecoin ^
 --genesis-time-main 1523364655 ^
 --genesis-nonce-main 2380297 ^
 --genesis-bits-main "1e0fffff" ^
+--genesis-pushdata-main "(byte)63" ^
 --genesis-block-hash-main "0x02a8be139ec629b13df22e7abc7f9ad5239df39efaf2f5bf3ab5e4d102425dbe" ^
 --genesis-merkle-hash-main "0xbd3233dd8d4e7ce3ee8097f4002b4f9303000a5109e02a402d41d2faf74eb244" ^
 --genesis-time-regtest 1523364655 ^

@@ -203,6 +203,11 @@
       "replaces": "1E0FFFFF",
       "defaultValue": "1E0FFFFF"
     },
+    "genesis-pushdata-main": {
+      "type": "parameter",
+      "replaces": "(byte)42",
+      "defaultValue": "(byte)42"
+    },
     "genesis-block-hash-main": {
       "type": "parameter",
       "replaces": "00000e8a284c34a684bde165d213f45b4a945a6c15118341d10f9616444dd140",
