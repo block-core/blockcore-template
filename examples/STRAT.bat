@@ -2,7 +2,7 @@ chcp 65001
 dotnet new blockcorecoin ^
 --output Stratis ^
 --cointicker STRAT ^
---magic "05-22-5-70" ^
+--magic "70-35-22-05" ^
 --cointype 105 ^
 --pubkeyaddress 63 ^
 --scriptaddress 125 ^
