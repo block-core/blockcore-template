@@ -61,3 +61,46 @@ Also consider using the "-o" (--output) switch to easier quickly generate many i
 ```
 dotnet new blockcorecoin -c BTC -o CoinOne
 ```
+
+### Linux
+
+To use the sample coin template on Linux, first install the .NET Core SDK:
+
+```
+sudo snap install dotnet-sdk --classic
+sudo snap alias dotnet-sdk.dotnet dotnet
+```
+
+Then clone the repository to a folder:
+
+```
+git clone https://github.com/block-core/blockcore-samples.git
+```
+
+Navigate into correct folder and install the template:
+```
+# Navigate to sample code
+
+cd blockcore-samples
+cd Blockcore-SampleCoin
+
+# Install the sample code as a "dotnet new" template
+dotnet new -i .
+```
+
+Navigate to your blockchain folder where you want to generate code:
+
+```
+dotnet new blockcorecoin --output MyCoin
+cd MyCoin
+```
+
+Edit your code, with Visual Studio Code or another editor.
+
+Now run and test your custom blockchain:
+
+```
+cd src
+cd MyCoin.Node
+dotnet run
+```
