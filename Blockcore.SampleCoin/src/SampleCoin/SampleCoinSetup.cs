@@ -49,7 +49,7 @@ namespace Blockcore.SampleCoin
             // TODO: Add additional DNS seeds here
             new DNSSeedData("seed1.blc.blockcore.net", "seed1.blc.blockcore.net"),
             new DNSSeedData("seed2.blc.blockcore.net", "seed2.blc.blockcore.net"),
-            new DNSSeedData("seed.blc.blockcore.net", "seed.blc.blockcore.net"),
+            new DNSSeedData("blc.seed.blockcore.net", "blc.seed.blockcore.net"),
          };
 
          public static List<NetworkAddress> Nodes = new List<NetworkAddress>

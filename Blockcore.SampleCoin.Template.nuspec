@@ -2,13 +2,13 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Blockcore.Coin.Template</id>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <description>
-      Creates a new blockchain based on blockcore technology.
+      Creates a new blockchain based on Blockcore technology.
     </description>
     <authors>Blockcore</authors>
     <license type="expression">MIT</license>
-    <repository type="git" url="https://github.com/block-core/blockcore" />
+    <repository type="git" url="https://github.com/block-core/blockcore-template" />
     <packageTypes>
       <packageType name="Template" />
     </packageTypes>
