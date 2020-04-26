@@ -39,12 +39,19 @@ namespace Blockcore.SampleCoin.Networks
 
          var consensusFactory = new PosConsensusFactory();
 
+         // Create the genesis block.
+         GenesisTime = SampleCoinSetup.Main.GenesisTime;
+         GenesisNonce = SampleCoinSetup.Main.GenesisNonce;
+         GenesisBits = SampleCoinSetup.Main.GenesisBits;
+         GenesisVersion = SampleCoinSetup.Main.GenesisVersion;
+         GenesisReward = SampleCoinSetup.Main.GenesisReward;
+
          Block genesisBlock = CreateGenesisBlock(consensusFactory,
-            SampleCoinSetup.Main.GenesisTime,
-            SampleCoinSetup.Main.GenesisNonce,
-            SampleCoinSetup.Main.GenesisBits,
-            SampleCoinSetup.Main.GenesisVersion,
-            SampleCoinSetup.Main.GenesisReward,
+            GenesisTime,
+            GenesisNonce,
+            GenesisBits,
+            GenesisVersion,
+            GenesisReward,
             SampleCoinSetup.GenesisText);
 
          Genesis = genesisBlock;
