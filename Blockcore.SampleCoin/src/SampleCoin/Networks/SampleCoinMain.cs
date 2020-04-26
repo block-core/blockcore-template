@@ -13,6 +13,7 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Specialized;
 using System.Net;
+using Blockcore.SampleCoin.Networks.Setup;
 
 namespace Blockcore.SampleCoin.Networks
 {
@@ -63,7 +64,6 @@ namespace Blockcore.SampleCoin.Networks
 
          Genesis = genesisBlock;
 
-         // Taken from StratisX.
          var consensusOptions = new PosConsensusOptions(
              maxBlockBaseSize: 1_000_000,
              maxStandardVersion: 2,

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Blockcore.SampleCoin.Networks
+namespace Blockcore.SampleCoin.Networks.Setup
 {
    public class ConversionTools
    {

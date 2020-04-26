@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Blockcore.SampleCoin.Networks;
+using Blockcore.SampleCoin.Networks.Setup;
 using NBitcoin;
 
 namespace Blockcore.SampleCoin

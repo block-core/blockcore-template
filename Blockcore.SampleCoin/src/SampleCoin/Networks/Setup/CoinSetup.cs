@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using NBitcoin;
 
-namespace Blockcore.SampleCoin.Networks
+namespace Blockcore.SampleCoin.Networks.Setup
 {
    internal class CoinSetup
    {
