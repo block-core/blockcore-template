@@ -1,162 +1,119 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
+using Blockcore.SampleCoin.Networks;
 using NBitcoin;
-using NBitcoin.Protocol;
 
 namespace Blockcore.SampleCoin
 {
-   public class SampleCoinSetup
+   internal class SampleCoinSetup
    {
-      public const string FileNamePrefix = "samplecoin";
-      public const string ConfigFileName = "samplecoin.conf";
-      public const string Magic = "02-4B-4C-42";
-      public const int CoinType = 1981; // SLIP-0044: https://github.com/satoshilabs/slips/blob/master/slip-0044.md
-      public const decimal PremineReward = 5000000;
-      public const decimal PoWBlockReward = 4545;
-      public const decimal PoSBlockReward = 5555;
-      public const int LastPowBlock = 12500;
-      public const string GenesisText = "SALES AT U.S. STORES HIT CATASTROPHIC DEPTHS"; // The New York Times, 2020-04-16
-      public static TimeSpan TargetSpacing = TimeSpan.FromSeconds(10 * 60);
-      public const uint ProofOfStakeTimestampMask = 0x0000000F; // 0x0000003F // 64 sec
-      public const int PoSVersion = 4444;
+      internal static SampleCoinSetup Instance = new SampleCoinSetup();
 
-      public class Main
+      internal CoinSetup Setup = new CoinSetup
       {
-         public const string Name = "SampleCoinMain";
-         public const string RootFolderName = "samplecoin";
-         public const string CoinTicker = "BLC";
-         public const int DefaultPort = 10000;
-         public const int DefaultRPCPort = 10001;
-         public const int DefaultAPIPort = 10002;
-         public const int DefaultSignalRPort = 10003;
-         public const int PubKeyAddress = 222; // B https://en.bitcoin.it/wiki/List_of_address_prefixes
-         public const int ScriptAddress = 223; // b
-         public const int SecretAddress = 224;
+         FileNamePrefix = "samplecoin",
+         ConfigFileName = "samplecoin.conf",
+         Magic = "02-4B-4C-42",
+         CoinType = 1981, // SLIP-0044: https://github.com/satoshilabs/slips/blob/master/slip-0044.md,
+         PremineReward = 5000000,
+         PoWBlockReward = 4545,
+         PoSBlockReward = 5555,
+         LastPowBlock = 12500,
+         GenesisText = "SALES AT U.S. STORES HIT CATASTROPHIC DEPTHS", // The New York Times, 2020-04-16
+         TargetSpacing = TimeSpan.FromSeconds(10 * 60),
+         ProofOfStakeTimestampMask = 0x0000000F, // 0x0000003F // 64 sec
+         PoSVersion = 4444
+      };
 
-         public const uint GenesisTime = 1587118902;
-         public const uint GenesisNonce = 631024;
-         public const uint GenesisBits = 0x1E0FFFFF;
-         public const int GenesisVersion = 1;
-         public static Money GenesisReward = Money.Zero;
-         public const string HashGenesisBlock = "00000e8a284c34a684bde165d213f45b4a945a6c15118341d10f9616444dd140";
-         public const string HashMerkleRoot = "55e4f7372f1be36fa85860ccb7eb7623c28c0ec8dd348125bba20681b3cb0249";
-
-         public static List<DNSSeedData> DNS = new List<DNSSeedData>
-         {
-            // TODO: Add additional DNS seeds here
-            new DNSSeedData("seed1.blc.blockcore.net", "seed1.blc.blockcore.net"),
-            new DNSSeedData("seed2.blc.blockcore.net", "seed2.blc.blockcore.net"),
-            new DNSSeedData("blc.seed.blockcore.net", "blc.seed.blockcore.net"),
-         };
-
-         public static List<NetworkAddress> Nodes = new List<NetworkAddress>
-         {
-            // TODO: Add additional seed nodes here
-            new NetworkAddress(IPAddress.Parse("89.10.227.34"), SampleCoinSetup.Main.DefaultPort),
-            new NetworkAddress(IPAddress.Parse("::1"), SampleCoinSetup.Main.DefaultPort),
-         };
-
-         public static Dictionary<int, CheckpointInfo> Checkpoints = new Dictionary<int, CheckpointInfo>
+      internal NetworkSetup Main = new NetworkSetup
+      {
+         Name = "SampleCoinMain",
+         RootFolderName = "samplecoin",
+         CoinTicker = "BLC",
+         DefaultPort = 10000,
+         DefaultRPCPort = 10001,
+         DefaultAPIPort = 10002,
+         DefaultSignalRPort = 10003,
+         PubKeyAddress = 222, // B https://en.bitcoin.it/wiki/List_of_address_prefixes
+         ScriptAddress = 223, // b
+         SecretAddress = 224,
+         GenesisTime = 1587118902,
+         GenesisNonce = 631024,
+         GenesisBits = 0x1E0FFFFF,
+         GenesisVersion = 1,
+         GenesisReward = Money.Zero,
+         HashGenesisBlock = "00000e8a284c34a684bde165d213f45b4a945a6c15118341d10f9616444dd140",
+         HashMerkleRoot = "55e4f7372f1be36fa85860ccb7eb7623c28c0ec8dd348125bba20681b3cb0249",
+         DNS = new[] { "seed1.blc.blockcore.net", "seed2.blc.blockcore.net", "blc.seed.blockcore.net" },
+         Nodes = new[] { "89.10.227.34", "::1" },
+         Checkpoints = new Dictionary<int, CheckpointInfo>
          {
             // TODO: Add checkpoints as the network progresses.
-         };
-      }
+         }
+      };
 
-      public class RegTest
+      internal NetworkSetup RegTest = new NetworkSetup
       {
-         public const string Name = "SampleCoinRegTest";
-         public const string RootFolderName = "SampleCoinRegTest";
-         public const string CoinTicker = "TBLC";
-         public const int DefaultPort = 20000;
-         public const int DefaultRPCPort = 20001;
-         public const int DefaultAPIPort = 20002;
-         public const int DefaultSignalRPort = 20003;
-         public const int PubKeyAddress = 111;
-         public const int ScriptAddress = 196;
-         public const int SecretAddress = 239;
-
-         public const uint GenesisTime = 1587118950;
-         public const uint GenesisNonce = 41450;
-         public const uint GenesisBits = 0x1F00FFFF;
-         public const int GenesisVersion = 1;
-         public static Money GenesisReward = Money.Zero;
-         public const string HashGenesisBlock = "00008af47a491ddf7251cc05cd48f0272a9cfad8540de9400ea0506850f5ed93";
-         public const string HashMerkleRoot = "344960deee772f2b6f8cdc5f6fe86e0fe3146f43430849d8ca5b9b851bdcc58c";
-
-         public static List<DNSSeedData> DNS = new List<DNSSeedData>
-         {
-            // TODO: Add additional DNS seeds here
-            new DNSSeedData("seedregtest1.blc.blockcore.net", "seedregtest1.blc.blockcore.net"),
-            new DNSSeedData("seedregtest2.blc.blockcore.net", "seedregtest2.blc.blockcore.net"),
-            new DNSSeedData("seedregtest.blc.blockcore.net", "seedregtest.blc.blockcore.net"),
-         };
-
-         public static List<NetworkAddress> Nodes = new List<NetworkAddress>
-         {
-            // TODO: Add additional seed nodes here
-            new NetworkAddress(IPAddress.Parse("89.10.227.34"), SampleCoinSetup.RegTest.DefaultPort),
-            new NetworkAddress(IPAddress.Parse("::1"), SampleCoinSetup.RegTest.DefaultPort),
-         };
-
-         public static Dictionary<int, CheckpointInfo> Checkpoints = new Dictionary<int, CheckpointInfo>
+         Name = "SampleCoinRegTest",
+         RootFolderName = "samplecoinregtest",
+         CoinTicker = "TBLC",
+         DefaultPort = 20000,
+         DefaultRPCPort = 20001,
+         DefaultAPIPort = 20002,
+         DefaultSignalRPort = 20003,
+         PubKeyAddress = 111,
+         ScriptAddress = 196,
+         SecretAddress = 239,
+         GenesisTime = 1587118950,
+         GenesisNonce = 41450,
+         GenesisBits = 0x1F00FFFF,
+         GenesisVersion = 1,
+         GenesisReward = Money.Zero,
+         HashGenesisBlock = "00008af47a491ddf7251cc05cd48f0272a9cfad8540de9400ea0506850f5ed93",
+         HashMerkleRoot = "344960deee772f2b6f8cdc5f6fe86e0fe3146f43430849d8ca5b9b851bdcc58c",
+         DNS = new[] { "seedregtest1.blc.blockcore.net", "seedregtest2.blc.blockcore.net", "seedregtest.blc.blockcore.net" },
+         Nodes = new[] { "89.10.227.34", "::1" },
+         Checkpoints = new Dictionary<int, CheckpointInfo>
          {
             // TODO: Add checkpoints as the network progresses.
-         };
-      }
+         }
+      };
 
-      public class Test
+      internal NetworkSetup Test = new NetworkSetup
       {
-         public const string Name = "SampleCoinTest";
-         public const string RootFolderName = "SampleCoinTest";
-         public const string CoinTicker = "TBLC";
-         public const int DefaultPort = 30000;
-         public const int DefaultRPCPort = 30001;
-         public const int DefaultAPIPort = 30002;
-         public const int DefaultSignalRPort = 30003;
-         public const int PubKeyAddress = 111;
-         public const int ScriptAddress = 196;
-         public const int SecretAddress = 239;
-
-         public const uint GenesisTime = 1587118953;
-         public const uint GenesisNonce = 4834;
-         public const uint GenesisBits = 0x1F0FFFFF;
-         public const int GenesisVersion = 1;
-         public static Money GenesisReward = Money.Zero;
-         public const string HashGenesisBlock = "0009066a2c5b01b1b5ecb41267ce79a94954b75a5906a83221c587428f1e0bcd";
-         public const string HashMerkleRoot = "7d197d7cf32b63e01b1cf0279b5d3c8ed733770284554881038d253b6c34b3a8";
-
-         public static List<DNSSeedData> DNS = new List<DNSSeedData>
-         {
-            // TODO: Add additional DNS seeds here
-            new DNSSeedData("seedtest1.blc.blockcore.net", "seedtest1.blc.blockcore.net"),
-            new DNSSeedData("seedtest2.blc.blockcore.net", "seedtest2.blc.blockcore.net"),
-            new DNSSeedData("seedtest.blc.blockcore.net", "seedtest.blc.blockcore.net"),
-         };
-
-         public static List<NetworkAddress> Nodes = new List<NetworkAddress>
-         {
-            // TODO: Add additional seed nodes here
-            new NetworkAddress(IPAddress.Parse("89.10.227.34"), SampleCoinSetup.Test.DefaultPort),
-            new NetworkAddress(IPAddress.Parse("::1"), SampleCoinSetup.Test.DefaultPort),
-         };
-
-         public static Dictionary<int, CheckpointInfo> Checkpoints = new Dictionary<int, CheckpointInfo>
+         Name = "SampleCoinTest",
+         RootFolderName = "samplecointest",
+         CoinTicker = "TBLC",
+         DefaultPort = 30000,
+         DefaultRPCPort = 30001,
+         DefaultAPIPort = 30002,
+         DefaultSignalRPort = 30003,
+         PubKeyAddress = 111,
+         ScriptAddress = 196,
+         SecretAddress = 239,
+         GenesisTime = 1587118953,
+         GenesisNonce = 4834,
+         GenesisBits = 0x1F0FFFFF,
+         GenesisVersion = 1,
+         GenesisReward = Money.Zero,
+         HashGenesisBlock = "0009066a2c5b01b1b5ecb41267ce79a94954b75a5906a83221c587428f1e0bcd",
+         HashMerkleRoot = "7d197d7cf32b63e01b1cf0279b5d3c8ed733770284554881038d253b6c34b3a8",
+         DNS = new[] { "seedtest1.blc.blockcore.net", "seedtest2.blc.blockcore.net", "seedtest.blc.blockcore.net" },
+         Nodes = new[] { "89.10.227.34", "::1" },
+         Checkpoints = new Dictionary<int, CheckpointInfo>
          {
             // TODO: Add checkpoints as the network progresses.
-         };
+         }
+      };
+
+      public bool IsPoSv3()
+      {
+         return Setup.PoSVersion == 3;
       }
 
-      public static bool IsPoSv3()
+      public bool IsPoSv4()
       {
-         return PoSVersion == 3;
-      }
-
-      public static bool IsPoSv4()
-      {
-         return PoSVersion == 4;
+         return Setup.PoSVersion == 4;
       }
    }
 }

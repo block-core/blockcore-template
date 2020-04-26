@@ -9,6 +9,10 @@ using Blockcore.SampleCoin.Networks.Rules;
 using NBitcoin;
 using NBitcoin.BouncyCastle.Math;
 using NBitcoin.DataEncoders;
+using System.Collections;
+using System.Linq;
+using System.Collections.Specialized;
+using System.Net;
 
 namespace Blockcore.SampleCoin.Networks
 {
@@ -16,17 +20,20 @@ namespace Blockcore.SampleCoin.Networks
    {
       public SampleCoinMain()
       {
-         NetworkType = NetworkType.Mainnet;
-         DefaultConfigFilename = SampleCoinSetup.ConfigFileName; // The default name used for the Blockcore.SampleCoin configuration file.
+         CoinSetup setup = SampleCoinSetup.Instance.Setup;
+         NetworkSetup network = SampleCoinSetup.Instance.Main;
 
-         Name = SampleCoinSetup.Main.Name;
-         CoinTicker = SampleCoinSetup.Main.CoinTicker;
-         Magic = ConversionTools.ConvertToUInt32(SampleCoinSetup.Magic);
-         RootFolderName = SampleCoinSetup.Main.RootFolderName;
-         DefaultPort = SampleCoinSetup.Main.DefaultPort;
-         DefaultRPCPort = SampleCoinSetup.Main.DefaultRPCPort;
-         DefaultAPIPort = SampleCoinSetup.Main.DefaultAPIPort;
-         DefaultSignalRPort = SampleCoinSetup.Main.DefaultSignalRPort;
+         NetworkType = NetworkType.Mainnet;
+         DefaultConfigFilename = setup.ConfigFileName; // The default name used for the Blockcore.SampleCoin configuration file.
+
+         Name = network.Name;
+         CoinTicker = network.CoinTicker;
+         Magic = ConversionTools.ConvertToUInt32(setup.Magic);
+         RootFolderName = network.RootFolderName;
+         DefaultPort = network.DefaultPort;
+         DefaultRPCPort = network.DefaultRPCPort;
+         DefaultAPIPort = network.DefaultAPIPort;
+         DefaultSignalRPort = network.DefaultSignalRPort;
 
          DefaultMaxOutboundConnections = 16;
          DefaultMaxInboundConnections = 109;
@@ -40,11 +47,11 @@ namespace Blockcore.SampleCoin.Networks
          var consensusFactory = new PosConsensusFactory();
 
          // Create the genesis block.
-         GenesisTime = SampleCoinSetup.Main.GenesisTime;
-         GenesisNonce = SampleCoinSetup.Main.GenesisNonce;
-         GenesisBits = SampleCoinSetup.Main.GenesisBits;
-         GenesisVersion = SampleCoinSetup.Main.GenesisVersion;
-         GenesisReward = SampleCoinSetup.Main.GenesisReward;
+         GenesisTime = network.GenesisTime;
+         GenesisNonce = network.GenesisNonce;
+         GenesisBits = network.GenesisBits;
+         GenesisVersion = network.GenesisVersion;
+         GenesisReward = network.GenesisReward;
 
          Block genesisBlock = CreateGenesisBlock(consensusFactory,
             GenesisTime,
@@ -52,7 +59,7 @@ namespace Blockcore.SampleCoin.Networks
             GenesisBits,
             GenesisVersion,
             GenesisReward,
-            SampleCoinSetup.GenesisText);
+            setup.GenesisText);
 
          Genesis = genesisBlock;
 
@@ -76,7 +83,7 @@ namespace Blockcore.SampleCoin.Networks
          Consensus = new NBitcoin.Consensus(
              consensusFactory: consensusFactory,
              consensusOptions: consensusOptions,
-             coinType: SampleCoinSetup.CoinType,
+             coinType: setup.CoinType,
              hashGenesisBlock: genesisBlock.GetHash(),
              subsidyHalvingInterval: 210000,
              majorityEnforceBlockUpgrade: 750,
@@ -91,31 +98,31 @@ namespace Blockcore.SampleCoin.Networks
              maxMoney: long.MaxValue,
              coinbaseMaturity: 50,
              premineHeight: 2,
-             premineReward: Money.Coins(SampleCoinSetup.PremineReward),
-             proofOfWorkReward: Money.Coins(SampleCoinSetup.PoWBlockReward),
+             premineReward: Money.Coins(setup.PremineReward),
+             proofOfWorkReward: Money.Coins(setup.PoWBlockReward),
              targetTimespan: TimeSpan.FromSeconds(14 * 24 * 60 * 60), // two weeks
-             targetSpacing: SampleCoinSetup.TargetSpacing,
+             targetSpacing: setup.TargetSpacing,
              powAllowMinDifficultyBlocks: false,
              posNoRetargeting: false,
              powNoRetargeting: false,
              powLimit: new Target(new uint256("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")),
              minimumChainWork: null,
              isProofOfStake: true,
-             lastPowBlock: SampleCoinSetup.LastPowBlock,
+             lastPowBlock: setup.LastPowBlock,
              proofOfStakeLimit: new BigInteger(uint256.Parse("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff").ToBytes(false)),
              proofOfStakeLimitV2: new BigInteger(uint256.Parse("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff").ToBytes(false)),
-             proofOfStakeReward: Money.Coins(SampleCoinSetup.PoSBlockReward),
-             proofOfStakeTimestampMask: SampleCoinSetup.ProofOfStakeTimestampMask
+             proofOfStakeReward: Money.Coins(setup.PoSBlockReward),
+             proofOfStakeTimestampMask: setup.ProofOfStakeTimestampMask
          );
 
-         Consensus.PosEmptyCoinbase = SampleCoinSetup.IsPoSv3();
-         Consensus.PosUseTimeFieldInKernalHash = SampleCoinSetup.IsPoSv3();
+         Consensus.PosEmptyCoinbase = SampleCoinSetup.Instance.IsPoSv3();
+         Consensus.PosUseTimeFieldInKernalHash = SampleCoinSetup.Instance.IsPoSv3();
 
          // TODO: Set your Base58Prefixes
          Base58Prefixes = new byte[12][];
-         Base58Prefixes[(int)Base58Type.PUBKEY_ADDRESS] = new byte[] { (SampleCoinSetup.Main.PubKeyAddress) };
-         Base58Prefixes[(int)Base58Type.SCRIPT_ADDRESS] = new byte[] { (SampleCoinSetup.Main.ScriptAddress) };
-         Base58Prefixes[(int)Base58Type.SECRET_KEY] = new byte[] { (SampleCoinSetup.Main.SecretAddress) };
+         Base58Prefixes[(int)Base58Type.PUBKEY_ADDRESS] = new byte[] { (byte)network.PubKeyAddress };
+         Base58Prefixes[(int)Base58Type.SCRIPT_ADDRESS] = new byte[] { (byte)network.ScriptAddress };
+         Base58Prefixes[(int)Base58Type.SECRET_KEY] = new byte[] { (byte)network.SecretAddress };
 
          Base58Prefixes[(int)Base58Type.ENCRYPTED_SECRET_KEY_NO_EC] = new byte[] { 0x01, 0x42 };
          Base58Prefixes[(int)Base58Type.ENCRYPTED_SECRET_KEY_EC] = new byte[] { 0x01, 0x43 };
@@ -128,21 +135,21 @@ namespace Blockcore.SampleCoin.Networks
          Base58Prefixes[(int)Base58Type.COLORED_ADDRESS] = new byte[] { 0x13 };
 
          Bech32Encoders = new Bech32Encoder[2];
-         var encoder = new Bech32Encoder(SampleCoinSetup.Main.CoinTicker);
+         var encoder = new Bech32Encoder(network.CoinTicker);
          Bech32Encoders[(int)Bech32Type.WITNESS_PUBKEY_ADDRESS] = encoder;
          Bech32Encoders[(int)Bech32Type.WITNESS_SCRIPT_ADDRESS] = encoder;
 
-         Checkpoints = SampleCoinSetup.Main.Checkpoints;
-         DNSSeeds = SampleCoinSetup.Main.DNS;
-         SeedNodes = SampleCoinSetup.Main.Nodes;
+         Checkpoints = network.Checkpoints;
+         DNSSeeds = network.DNS.Select(dns => new DNSSeedData(dns, dns)).ToList();
+         SeedNodes = network.Nodes.Select(node => new NBitcoin.Protocol.NetworkAddress(IPAddress.Parse(node), network.DefaultPort)).ToList();
 
          StandardScriptsRegistry = new SampleCoinStandardScriptsRegistry();
 
          // 64 below should be changed to TargetSpacingSeconds when we move that field.
          Assert(DefaultBanTimeSeconds <= Consensus.MaxReorgLength * 64 / 2);
 
-         Assert(Consensus.HashGenesisBlock == uint256.Parse(SampleCoinSetup.Main.HashGenesisBlock));
-         Assert(Genesis.Header.HashMerkleRoot == uint256.Parse(SampleCoinSetup.Main.HashMerkleRoot));
+         Assert(Consensus.HashGenesisBlock == uint256.Parse(network.HashGenesisBlock));
+         Assert(Genesis.Header.HashMerkleRoot == uint256.Parse(network.HashMerkleRoot));
 
          RegisterRules(Consensus);
          RegisterMempoolRules(Consensus);
