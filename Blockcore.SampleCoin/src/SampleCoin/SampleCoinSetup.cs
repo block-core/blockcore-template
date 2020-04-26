@@ -55,8 +55,8 @@ namespace Blockcore.SampleCoin
          public static List<NetworkAddress> Nodes = new List<NetworkAddress>
          {
             // TODO: Add additional seed nodes here
-            new NetworkAddress(IPAddress.Parse("89.10.227.34"), SampleCoinSetup.Test.DefaultPort),
-            new NetworkAddress(IPAddress.Parse("::1"), SampleCoinSetup.Test.DefaultPort),
+            new NetworkAddress(IPAddress.Parse("89.10.227.34"), SampleCoinSetup.Main.DefaultPort),
+            new NetworkAddress(IPAddress.Parse("::1"), SampleCoinSetup.Main.DefaultPort),
          };
 
          public static Dictionary<int, CheckpointInfo> Checkpoints = new Dictionary<int, CheckpointInfo>
@@ -97,8 +97,8 @@ namespace Blockcore.SampleCoin
          public static List<NetworkAddress> Nodes = new List<NetworkAddress>
          {
             // TODO: Add additional seed nodes here
-            new NetworkAddress(IPAddress.Parse("89.10.227.34"), SampleCoinSetup.Test.DefaultPort),
-            new NetworkAddress(IPAddress.Parse("::1"), SampleCoinSetup.Test.DefaultPort),
+            new NetworkAddress(IPAddress.Parse("89.10.227.34"), SampleCoinSetup.RegTest.DefaultPort),
+            new NetworkAddress(IPAddress.Parse("::1"), SampleCoinSetup.RegTest.DefaultPort),
          };
 
          public static Dictionary<int, CheckpointInfo> Checkpoints = new Dictionary<int, CheckpointInfo>

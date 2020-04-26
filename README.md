@@ -82,7 +82,7 @@ Navigate into correct folder and install the template:
 # Navigate to sample code
 
 cd blockcore-samples
-cd Blockcore-SampleCoin
+cd Blockcore.SampleCoin
 
 # Install the sample code as a "dotnet new" template
 dotnet new -i .
