@@ -34,7 +34,6 @@ namespace Blockcore.SampleCoin
          DefaultPort = 10000,
          DefaultRPCPort = 10001,
          DefaultAPIPort = 10002,
-         DefaultSignalRPort = 10003,
          PubKeyAddress = 222, // B https://en.bitcoin.it/wiki/List_of_address_prefixes
          ScriptAddress = 223, // b
          SecretAddress = 224,
@@ -61,7 +60,6 @@ namespace Blockcore.SampleCoin
          DefaultPort = 20000,
          DefaultRPCPort = 20001,
          DefaultAPIPort = 20002,
-         DefaultSignalRPort = 20003,
          PubKeyAddress = 111,
          ScriptAddress = 196,
          SecretAddress = 239,
@@ -88,7 +86,6 @@ namespace Blockcore.SampleCoin
          DefaultPort = 30000,
          DefaultRPCPort = 30001,
          DefaultAPIPort = 30002,
-         DefaultSignalRPort = 30003,
          PubKeyAddress = 111,
          ScriptAddress = 196,
          SecretAddress = 239,

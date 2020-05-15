@@ -28,7 +28,6 @@ namespace Blockcore.SampleCoin.Networks.Setup
       internal int DefaultPort;
       internal int DefaultRPCPort;
       internal int DefaultAPIPort;
-      internal int DefaultSignalRPort;
       internal int PubKeyAddress;
       internal int ScriptAddress;
       internal int SecretAddress;

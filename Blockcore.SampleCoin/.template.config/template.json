@@ -57,12 +57,6 @@
       "replaces": "10002",
       "defaultValue": "9331"
     },
-    "wsport": {
-      "type": "parameter",
-      "description": "The WS (Web Sockets) network port",
-      "replaces": "10003",
-      "defaultValue": "9330"
-    },
 
     "port-regtest": {
       "type": "parameter",
@@ -82,12 +76,6 @@
       "replaces": "20002",
       "defaultValue": "9331"
     },
-    "wsport-regtest": {
-      "type": "parameter",
-      "description": "The WS (Web Sockets) network port",
-      "replaces": "20003",
-      "defaultValue": "9330"
-    },
 
     "port-test": {
       "type": "parameter",
@@ -106,12 +94,6 @@
       "description": "The API network port",
       "replaces": "30002",
       "defaultValue": "9331"
-    },
-    "wsport-test": {
-      "type": "parameter",
-      "description": "The WS (Web Sockets) network port",
-      "replaces": "30003",
-      "defaultValue": "9330"
     },
 
     "cointype": {
