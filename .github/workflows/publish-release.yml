@@ -1,0 +1,31 @@
+name: Publish Template To Nuget
+
+on:
+  release:
+    types: [published]
+
+jobs:
+
+  publishTemplate:
+
+    runs-on: windows-latest
+
+    env:    
+      NUSPEC_PATH: 'Blockcore.SampleCoin.Template.nuspec'
+    
+    steps:
+      
+    - uses: actions/checkout@v2
+
+    - uses: nuget/setup-nuget@v1
+      with:
+        nuget-version: '5.x'
+    - name: Nuget Pack
+    - run: nuget pack ${{env.NUSPEC_PATH}}
+
+    - uses: nuget/setup-nuget@v1
+      with:
+        nuget-api-key: ${{ secrets.NUGET_KEY }}
+        nuget-version: '5.x'
+    - name: Nuget Push
+    - run: nuget push *.nupkg -ApiKey ${{secrets.NUGET_KEY}} -Source "https://api.nuget.org/v3/index.json" -SkipDuplicate -NoSymbols
