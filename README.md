@@ -10,15 +10,17 @@
   </p>
 </p>
 
+# Create your own Blockchain
 
-### Introduction
+The right place to get started, is this repository: https://github.com/block-core/blockcore-node
+
+## Introduction to our "dotnet new" template
 
 This repository contains samples for building new blockchain applications and coins using the Blockcore platform. 
 
 The samples can be copied directly or if you prefer you can install the Blockcore template and use `dotnet new` to create a new blockchain based on the sample. Using the template will substitute in the name of your blockchain and coin ticker.
 
-
-### Template Usage
+## Template Usage
 
 1) Install the template from nuget
 ```
@@ -27,14 +29,18 @@ dotnet new -i Blockcore.Coin.Template
 
 2) Create a directory for your coin
 ```
-~$  mkdir mynewcoin
-~$  cd mynewcoin
+mkdir mynewcoin
+cd mynewcoin
 ```
 
 3) Create your coin
 ```
-~/mynewcoin$  dotnet new blockcorecoin --coinTicker MNC
+dotnet new blockcorecoin --coinTicker MNC .....
 ```
+
+There are many parameters you need to specify, so find examples here:
+
+[https://github.com/block-core/blockcore-nodes/tree/master/scripts](https://github.com/block-core/blockcore-nodes/tree/master/scripts)
 
 4) Find all the "TODO" comments in the code for things that needs to be replaced before you can start you blockchain.
 
@@ -45,7 +51,6 @@ dotnet new -i Blockcore.Coin.Template
 - [ ] Parameterize magic number
 - [ ] Parameterize pszTimestamp
 - [ ] Optional features
-
 
 ### Template Development
 
