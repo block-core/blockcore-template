@@ -1,19 +1,16 @@
 using System;
 using System.Threading.Tasks;
-using Blockcore;
 using Blockcore.Builder;
 using Blockcore.Configuration;
-using Blockcore.Features.NodeHost;
 using Blockcore.Features.BlockStore;
 using Blockcore.Features.ColdStaking;
 using Blockcore.Features.Consensus;
 using Blockcore.Features.Diagnostic;
 using Blockcore.Features.MemoryPool;
 using Blockcore.Features.Miner;
+using Blockcore.Features.NodeHost;
 using Blockcore.Features.RPC;
 using Blockcore.Utilities;
-using NBitcoin;
-using NBitcoin.Protocol;
 
 namespace Blockcore.SampleCoin.Daemon
 {
@@ -23,11 +20,7 @@ namespace Blockcore.SampleCoin.Daemon
       {
          try
          {
-            var nodeSettings = new NodeSettings(networksSelector: Networks.Networks.SampleCoin,
-                protocolVersion: ProtocolVersion.PROVEN_HEADER_VERSION, args: args)
-            {
-               MinProtocolVersion = ProtocolVersion.ALT_PROTOCOL_VERSION
-            };
+            var nodeSettings = new NodeSettings(networksSelector: Networks.Networks.SampleCoin, args: args);
 
             IFullNodeBuilder nodeBuilder = new FullNodeBuilder()
                 .UseNodeSettings(nodeSettings)
