@@ -19,13 +19,12 @@ jobs:
 
     - uses: nuget/setup-nuget@v1
       with:
+        nuget-api-key: ${{ secrets.NUGET_KEY }}
         nuget-version: '5.x'
-    - name: Nuget Pack
     - run: nuget pack ${{env.NUSPEC_PATH}}
 
     - uses: nuget/setup-nuget@v1
       with:
         nuget-api-key: ${{ secrets.NUGET_KEY }}
         nuget-version: '5.x'
-    - name: Nuget Push
     - run: nuget push *.nupkg -ApiKey ${{secrets.NUGET_KEY}} -Source "https://api.nuget.org/v3/index.json" -SkipDuplicate -NoSymbols
