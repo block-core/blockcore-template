@@ -42,7 +42,7 @@
     "port": {
       "type": "parameter",
       "description": "The P2P network port",
-      "replaces": "10000",
+      "replaces": "10003",
       "defaultValue": "9333"
     },
     "rpcport": {

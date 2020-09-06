@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Blockcore.Coin.Template</id>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
     <description>
       Creates a new blockchain based on Blockcore technology.
     </description>

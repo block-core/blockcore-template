@@ -31,7 +31,7 @@ namespace Blockcore.SampleCoin
          Name = "SampleCoinMain",
          RootFolderName = "samplecoin",
          CoinTicker = "BLC",
-         DefaultPort = 10000,
+         DefaultPort = 10003,
          DefaultRPCPort = 10001,
          DefaultAPIPort = 10002,
          PubKeyAddress = 222, // B https://en.bitcoin.it/wiki/List_of_address_prefixes
