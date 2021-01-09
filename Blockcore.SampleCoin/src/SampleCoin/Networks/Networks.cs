@@ -1,4 +1,4 @@
-using NBitcoin;
+using Blockcore.Networks;
 
 namespace Blockcore.SampleCoin.Networks
 {

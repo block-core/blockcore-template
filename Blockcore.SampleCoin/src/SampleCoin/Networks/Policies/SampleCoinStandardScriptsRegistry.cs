@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using NBitcoin;
+using Blockcore.Consensus.ScriptInfo;
+using Blockcore.Consensus.TransactionInfo;
+using Blockcore.Networks;
 using NBitcoin.BitcoinCore;
 
 namespace Blockcore.SampleCoin.Networks.Policies
