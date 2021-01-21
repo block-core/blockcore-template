@@ -46,6 +46,7 @@ namespace Blockcore.SampleCoin.Networks
          DefaultMaxInboundConnections = 109;
          MaxTipAge = 2 * 60 * 60;
          MinTxFee = 10000;
+         MaxTxFee = Money.Coins(1).Satoshi;
          FallbackFee = 10000;
          MinRelayTxFee = 10000;
          MaxTimeOffsetSeconds = 25 * 60;
