@@ -9,9 +9,7 @@ using Blockcore.SampleCoin.Networks.Rules;
 using NBitcoin;
 using NBitcoin.BouncyCastle.Math;
 using NBitcoin.DataEncoders;
-using System.Collections;
 using System.Linq;
-using System.Collections.Specialized;
 using System.Net;
 using Blockcore.SampleCoin.Networks.Setup;
 using Blockcore.Networks;
@@ -130,10 +128,11 @@ namespace Blockcore.SampleCoin.Networks
              proofOfStakeLimitV2: new BigInteger(uint256.Parse("000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffff").ToBytes(false)),
              proofOfStakeReward: Money.Coins(setup.PoSBlockReward),
              proofOfStakeTimestampMask: setup.ProofOfStakeTimestampMask
-         );
-
-         Consensus.PosEmptyCoinbase = SampleCoinSetup.Instance.IsPoSv3();
-         Consensus.PosUseTimeFieldInKernalHash = SampleCoinSetup.Instance.IsPoSv3();
+         )
+         {
+            PosEmptyCoinbase = SampleCoinSetup.Instance.IsPoSv3(),
+            PosUseTimeFieldInKernalHash = SampleCoinSetup.Instance.IsPoSv3()
+         };
 
          // TODO: Set your Base58Prefixes
          Base58Prefixes = new byte[12][];
