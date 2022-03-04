@@ -130,8 +130,8 @@ namespace Blockcore.SampleCoin.Networks
              proofOfStakeTimestampMask: setup.ProofOfStakeTimestampMask
          )
          {
-            PosEmptyCoinbase = SampleCoinSetup.Instance.IsPoSv3(),
-            PosUseTimeFieldInKernalHash = SampleCoinSetup.Instance.IsPoSv3()
+            PosEmptyCoinbase = SampleCoinSetup.Instance.IsPoSv4(),
+            PosUseTimeFieldInKernalHash = SampleCoinSetup.Instance.IsPoSv4()
          };
 
          // TODO: Set your Base58Prefixes
