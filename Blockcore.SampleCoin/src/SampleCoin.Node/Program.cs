@@ -36,7 +36,7 @@ namespace Blockcore.SampleCoin.Daemon
             IFullNode node = nodeBuilder.Build();
 
             if (node != null)
-               await node.RunAsync();
+               await node.RunAsync().ConfigureAwait(false);
          }
          catch (Exception ex)
          {
