@@ -8,9 +8,9 @@ using Blockcore.Networks;
 using Blockcore.P2P;
 using Blockcore.SampleCoin.Networks.Policies;
 using Blockcore.SampleCoin.Networks.Setup;
-using NBitcoin;
-using NBitcoin.BouncyCastle.Math;
-using NBitcoin.DataEncoders;
+using Blockcore.NBitcoin;
+using Blockcore.NBitcoin.BouncyCastle.math;
+using Blockcore.NBitcoin.DataEncoders;
 
 namespace Blockcore.SampleCoin.Networks
 {

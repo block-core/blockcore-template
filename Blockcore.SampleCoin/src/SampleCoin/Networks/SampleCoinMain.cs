@@ -6,9 +6,6 @@ using Blockcore.Features.Consensus.Rules.UtxosetRules;
 using Blockcore.Features.MemoryPool.Rules;
 using Blockcore.SampleCoin.Networks.Policies;
 using Blockcore.SampleCoin.Networks.Rules;
-using NBitcoin;
-using NBitcoin.BouncyCastle.Math;
-using NBitcoin.DataEncoders;
 using System.Linq;
 using System.Net;
 using Blockcore.SampleCoin.Networks.Setup;
@@ -19,6 +16,9 @@ using Blockcore.Consensus;
 using Blockcore.P2P;
 using Blockcore.Consensus.TransactionInfo;
 using Blockcore.Consensus.ScriptInfo;
+using Blockcore.NBitcoin;
+using Blockcore.NBitcoin.BouncyCastle.math;
+using Blockcore.NBitcoin.DataEncoders;
 using Blockcore.SampleCoin.Networks.Deployments;
 
 namespace Blockcore.SampleCoin.Networks
